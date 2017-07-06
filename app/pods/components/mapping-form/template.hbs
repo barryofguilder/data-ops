@@ -1,0 +1,81 @@
+{{#nrc-modal as |modal|}}
+  {{#modal.header close=(action close)}}
+    Edit Mapping - Patient {{model.name}}
+  {{/modal.header}}
+  {{#modal.body}}
+    <div class="form-group row">
+      <label for="mapping-type" class="col-sm-4 col-form-label">
+        Mapping Type
+      </label>
+      <div class="col-sm-8">
+        {{#x-select class="form-control custom-select" id="mapping-type" value=fieldMapping.mappingType action=(action (mut fieldMapping.mappingType)) as |xs|}}
+          {{#each mappingTypes as |mappingType|}}
+            {{#xs.option value=mappingType.id}}{{mappingType.name}}{{/xs.option}}
+          {{/each}}
+        {{/x-select}}
+      </div>
+    </div>
+
+    {{#if showRawInputField}}
+      <div class="form-group row">
+        <label for="raw-input-field" class="col-sm-4 col-form-label">
+          RAW Input Field
+        </label>
+        <div class="col-sm-8">
+          {{#x-select class="form-control custom-select" id="raw-input-field" value=fieldMapping.rawField action=(action (mut fieldMapping.rawField)) as |xs|}}
+            {{#xs.option value=""}}Select...{{/xs.option}}
+            {{#each rawInputFields as |rawInputField|}}
+              {{#xs.option value=rawInputField}}{{rawInputField}}{{/xs.option}}
+            {{/each}}
+          {{/x-select}}
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if showConversionFunction}}
+      <div class="form-group row">
+        <label for="conversion-function" class="col-sm-4 col-form-label">
+          Conversion Function
+        </label>
+        <div class="col-sm-8">
+          {{#x-select class="form-control custom-select" id="conversion-function" value=fieldMapping.conversionFunction action=(action (mut fieldMapping.conversionFunction)) as |xs|}}
+            {{#xs.option value=""}}Select...{{/xs.option}}
+            {{#each conversionFunctions as |conversionFunction|}}
+              {{#xs.option value=conversionFunction}}{{conversionFunction}}{{/xs.option}}
+            {{/each}}
+          {{/x-select}}
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">
+          Conversion Summary
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static">
+            {{conversion-summary fieldMapping.conversionFunction rawField=fieldMapping.rawField}}
+          </p>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if showCustomMapping}}
+      <div class="form-group row">
+        <label for="custom-mapping" class="col-sm-4 col-form-label">
+          Custom Mapping
+        </label>
+        <div class="col-sm-8">
+          {{textarea class="form-control" id="custom-mapping" value=fieldMapping.customMapping rows="4"}}
+        </div>
+      </div>
+    {{/if}}
+  {{/modal.body}}
+  {{#modal.footer}}
+    <button type="button" class="btn btn-secondary" {{action close}}>
+      Cancel
+    </button>
+    <button type="submit" class="btn btn-primary" {{action "save"}}>
+      Save
+    </button>
+  {{/modal.footer}}
+{{/nrc-modal}}

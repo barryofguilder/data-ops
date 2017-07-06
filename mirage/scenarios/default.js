@@ -12,35 +12,35 @@ export default function(server) {
   for (let i = 0; i < channels.length; i++) {
     let channel = channels[i];
 
-    server.create('patient-field', {
+    server.create('field-mapping', {
       name: 'PatientBK',
       mappingType: MAPPING_TYPE.CUSTOM,
       customMapping: 'CONCAT_WS(\'\',MRN,DOB)',
       channel
     });
 
-    server.create('patient-field', {
+    server.create('field-mapping', {
       name: 'AddressCity',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
       rawField: 'City',
       channel
     });
 
-    server.create('patient-field', {
+    server.create('field-mapping', {
       name: 'AddressPostalCode',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
       rawField: 'Zip',
       channel
     });
 
-    server.create('patient-field', {
+    server.create('field-mapping', {
       name: 'AddressState',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
       rawField: 'ST',
       channel
     });
 
-    server.create('patient-field', {
+    server.create('field-mapping', {
       name: 'DateOfBirth',
       mappingType: MAPPING_TYPE.FUNCTION,
       rawField: 'DOB',
@@ -48,13 +48,13 @@ export default function(server) {
       channel
     });
 
-    server.create('patient-field', {
+    server.create('field-mapping', {
       name: 'EthnicGroup',
       mappingType: MAPPING_TYPE.NOT_MAPPED,
       channel
     });
 
-    server.create('patient-field', {
+    server.create('field-mapping', {
       name: 'InsurancePlanType',
       mappingType: MAPPING_TYPE.NOT_MAPPED,
       channel

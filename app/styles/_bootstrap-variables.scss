@@ -11,3 +11,13 @@ $table-bg-accent:               #f9f9f9;
 $table-bg-hover:                darken($table-bg-accent, 2%);
 $table-bg-active:               $table-bg-hover;
 $table-border-color:            darken($table-header-bg, 12%);
+
+
+// Modals
+
+$modal-inner-padding:         10px;
+$modal-header-padding:        10px;
+$modal-content-border-color:  #474747;
+$modal-content-xs-box-shadow: 0 3px 18px rgba(0,0,0,.4);
+$modal-header-border-color:   #4d5c5d;
+$modal-footer-border-color:   #8d8c8c;

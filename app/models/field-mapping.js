@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 import MAPPING_TYPE from 'data-ops/utils/mapping-type-constants';
+import ConversionSummary from 'data-ops/utils/conversion-summary';
 
 export default DS.Model.extend({
   name: DS.attr('string'),
@@ -11,7 +12,7 @@ export default DS.Model.extend({
 
   channel: DS.belongsTo('channel'),
 
-  rawInputMapping: Ember.computed('mappingType', 'customMapping', 'rawField', function() {
+  rawInputMapping: Ember.computed('mappingType', 'customMapping', 'rawField', 'conversionFunction', function() {
     let mappingType = this.get('mappingType');
 
     if (mappingType === MAPPING_TYPE.CUSTOM) {
@@ -28,5 +29,5 @@ export default DS.Model.extend({
 });
 
 function conversionFunctionDisplay(conversionFunction, rawField) {
-  return conversionFunction.replace('<input>', rawField);
+  return ConversionSummary(conversionFunction, rawField);
 }

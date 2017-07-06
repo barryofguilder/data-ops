@@ -2,5 +2,5 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   name: DS.attr('string'),
-  patientFields: DS.hasMany('patient-field')
+  patientFields: DS.hasMany('field-mapping')
 });

@@ -7,10 +7,12 @@
 // 3rd party
 @import "bootstrap";
 @import "font-awesome";
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
 
 // Component styles
 @import "pod-styles";
-
+@import "modal";
 
 body {
   // Push down the body content due to the fixed navbar

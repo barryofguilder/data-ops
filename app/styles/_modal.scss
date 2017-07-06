@@ -1,0 +1,36 @@
+// Modal
+//
+
+// Apply the 'in' class styles from Bootstrap by default since
+// ember-modal-dialog is always considered visible
+.modal {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+// Since the ember-modal-dialog overlay surrounds the modal, we
+// can't set the opacity. Instead, lighten the background color.
+.modal-backdrop {
+  &.translucent {
+    background-color: rgba(#333, .75);
+  }
+}
+
+.modal-content {
+  box-shadow: $modal-content-xs-box-shadow;
+}
+
+.modal-header {
+  background: darken(#f5f5f5, 8%);
+  @include border-top-radius($border-radius-lg);
+}
+
+.modal-title {
+  font-size: 1.2rem;
+}
+
+.modal-footer {
+  background: #f5f5f5;
+  @include border-bottom-radius($border-radius-lg);
+}
