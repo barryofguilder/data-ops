@@ -1,0 +1,22 @@
+{{page-title "Channel Mapping"}}
+
+{{#mapping-section title="ODS Patient Fields"}}
+  {{#data-table}}
+    <thead>
+      <tr>
+        <th>Patient Field</th>
+        <th>RAW Input Field Mapping</th>
+        <th class="col-options"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model.patientFields as |field|}}
+        <tr>
+          <td>{{field.name}}</td>
+          <td>{{field.rawInputMapping}}</td>
+          <td></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  {{/data-table}}
+{{/mapping-section}}

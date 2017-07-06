@@ -3,6 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'data-ops',
+    podModulePrefix: 'data-ops/pods',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',

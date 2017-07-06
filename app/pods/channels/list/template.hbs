@@ -1,0 +1,9 @@
+{{page-title "Channels"}}
+
+<ul class="list-group">
+  {{#each sortedChannels as |channel|}}
+    {{#link-to "channels.details" channel.id class="list-group-item list-group-item-action"}}
+      {{channel.name}}
+    {{/link-to}}
+  {{/each}}
+</ul>

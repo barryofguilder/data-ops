@@ -1,8 +1,18 @@
 // Application Styles
 //
 
+@import "variables";
 @import "bootstrap-variables";
 
 // 3rd party
-@import "components/bootstrap";
+@import "bootstrap";
 @import "font-awesome";
+
+// Component styles
+@import "pod-styles";
+
+
+body {
+  // Push down the body content due to the fixed navbar
+  padding-top: 4.5rem;
+}

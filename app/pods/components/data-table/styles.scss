@@ -1,0 +1,43 @@
+// Data Table
+//
+
+& {
+  border: $table-border-width solid $table-border-color;
+
+  th,
+  td {
+    vertical-align: middle;
+    padding: $table-sm-cell-padding;
+  }
+
+  thead th {
+    border-bottom: $table-border-width solid $table-header-border;
+  }
+
+  th {
+    background: $table-header-bg;
+    border-top: $table-border-width solid $table-header-border;
+    border-left: $table-border-width solid $table-header-divider-border;
+
+    &:first-child {
+      border-left: $table-border-width solid $table-header-border;
+    }
+
+    &:last-child {
+      border-right: $table-border-width solid $table-header-border;
+    }
+  }
+
+  td {
+    border-top: none;
+    border-right: $table-border-width solid $table-column-border;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.col-options {
+  width: 64px;
+}

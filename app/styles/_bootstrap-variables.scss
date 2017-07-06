@@ -2,3 +2,12 @@
 //
 
 @import "../../bower_components/bootstrap/scss/variables";
+
+// Tables
+
+$table-sm-cell-padding:         .4rem;
+
+$table-bg-accent:               #f9f9f9;
+$table-bg-hover:                darken($table-bg-accent, 2%);
+$table-bg-active:               $table-bg-hover;
+$table-border-color:            darken($table-header-bg, 12%);
