@@ -63,8 +63,24 @@ export default function(server) {
 
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
+      name: 'Gender',
+      mappingType: MAPPING_TYPE.CODESET,
+      codeset: 'AdministrativeSex',
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
       name: 'InsurancePlanType',
       mappingType: MAPPING_TYPE.NOT_MAPPED,
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
+      name: 'PrimaryLanguage',
+      mappingType: MAPPING_TYPE.CODESET,
+      codeset: 'Language',
       channel
     });
 

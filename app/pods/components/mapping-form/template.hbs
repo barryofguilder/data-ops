@@ -32,6 +32,22 @@
       </div>
     {{/if}}
 
+    {{#if showCodesetField}}
+      <div class="form-group row">
+        <label for="codeset" class="col-sm-4 col-form-label">
+          Codeset
+        </label>
+        <div class="col-sm-8">
+          {{#x-select class="form-control custom-select" id="codeset" value=fieldMapping.codeset action=(action (mut fieldMapping.codeset)) as |xs|}}
+            {{#xs.option value=""}}Select...{{/xs.option}}
+            {{#each codesets as |codeset|}}
+              {{#xs.option value=codeset}}{{codeset}}{{/xs.option}}
+            {{/each}}
+          {{/x-select}}
+        </div>
+      </div>
+    {{/if}}
+
     {{#if showConversionFunction}}
       <div class="form-group row">
         <label for="conversion-function" class="col-sm-4 col-form-label">

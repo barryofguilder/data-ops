@@ -19,6 +19,21 @@ const ENCOUNTER_INPUT_FIELDS = [
   'AdmitSource',
   'FacilityId'
 ];
+const CODESETS = [
+  'AdministrativeSex',
+  'AdmissionType',
+  'AdmitSource',
+  'DischargeDisposition',
+  'DischargeStatus',
+  'EthnicGroup',
+  'Language',
+  'MaritalStatus',
+  'NPACode',
+  'PatientClass',
+  'Province',
+  'Race',
+  'TelecommunicationUseCode'
+]
 
 export default Ember.Component.extend({
   model: null,
@@ -39,6 +54,9 @@ export default Ember.Component.extend({
     id: MAPPING_TYPE.RENAME,
     name: 'Rename'
   }, {
+    id: MAPPING_TYPE.CODESET,
+    name: 'Codeset'
+  }, {
     id: MAPPING_TYPE.FUNCTION,
     name: 'Canned Function'
   }, {
@@ -52,6 +70,13 @@ export default Ember.Component.extend({
 
     return PATIENT_INPUT_FIELDS;
   }),
+  codesets: Ember.computed('model.fieldType', function() {
+    if (this.get('model.fieldType') === FIELD_TYPE.ENCOUNTER) {
+      return CODESETS;
+    }
+
+    return CODESETS;
+  }),
   conversionFunctions: [
     'date_YYYYMMDDhhmm(<input>)',
     'date_YYYYMMDDhhmmss(<input>)'
@@ -60,6 +85,11 @@ export default Ember.Component.extend({
   showRawInputField: Ember.computed('fieldMapping.mappingType', function() {
     let mappingType = this.get('fieldMapping.mappingType');
     return mappingType === MAPPING_TYPE.RENAME || mappingType === MAPPING_TYPE.FUNCTION;
+  }),
+
+  showCodesetField: Ember.computed('fieldMapping.mappingType', function() {
+    let mappingType = this.get('fieldMapping.mappingType');
+    return mappingType === MAPPING_TYPE.CODESET;
   }),
 
   showConversionFunction: Ember.computed('fieldMapping.mappingType', function() {
@@ -73,7 +103,7 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
 
-    let mappingProperties = this.get('model').getProperties('mappingType', 'rawField', 'conversionFunction', 'customMapping');
+    let mappingProperties = this.get('model').getProperties('mappingType', 'rawField', 'codeset', 'conversionFunction', 'customMapping');
     this.get('fieldMapping').setProperties(mappingProperties);
   },
 

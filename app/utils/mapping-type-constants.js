@@ -2,5 +2,6 @@ export default {
   NOT_MAPPED: 'not_mapped',
   RENAME: 'rename',
   CUSTOM: 'custom',
-  FUNCTION: 'function'
+  FUNCTION: 'function',
+  CODESET: 'codeset'
 }
