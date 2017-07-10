@@ -1,6 +1,6 @@
 export default {
   NOT_MAPPED: 'not_mapped',
-  PASSTHROUGH: 'passthrough',
+  RENAME: 'rename',
   CUSTOM: 'custom',
   FUNCTION: 'function'
 }

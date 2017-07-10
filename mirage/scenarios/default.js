@@ -24,7 +24,7 @@ export default function(server) {
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressCity',
-      mappingType: MAPPING_TYPE.PASSTHROUGH,
+      mappingType: MAPPING_TYPE.RENAME,
       rawField: 'City',
       channel
     });
@@ -32,7 +32,7 @@ export default function(server) {
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressPostalCode',
-      mappingType: MAPPING_TYPE.PASSTHROUGH,
+      mappingType: MAPPING_TYPE.RENAME,
       rawField: 'Zip',
       channel
     });
@@ -40,7 +40,7 @@ export default function(server) {
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressState',
-      mappingType: MAPPING_TYPE.PASSTHROUGH,
+      mappingType: MAPPING_TYPE.RENAME,
       rawField: 'ST',
       channel
     });
@@ -80,7 +80,7 @@ export default function(server) {
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.ENCOUNTER,
       name: 'AdmitSource',
-      mappingType: MAPPING_TYPE.PASSTHROUGH,
+      mappingType: MAPPING_TYPE.RENAME,
       rawField: 'AdmitSource',
       channel
     });
@@ -88,7 +88,7 @@ export default function(server) {
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.ENCOUNTER,
       name: 'FacilityID',
-      mappingType: MAPPING_TYPE.PASSTHROUGH,
+      mappingType: MAPPING_TYPE.RENAME,
       rawField: 'FacilityId',
       channel
     });

@@ -36,8 +36,8 @@ export default Ember.Component.extend({
     id: MAPPING_TYPE.NOT_MAPPED,
     name: 'Not Mapped'
   }, {
-    id: MAPPING_TYPE.PASSTHROUGH,
-    name: 'Passthrough'
+    id: MAPPING_TYPE.RENAME,
+    name: 'Rename'
   }, {
     id: MAPPING_TYPE.FUNCTION,
     name: 'Canned Function'
@@ -59,7 +59,7 @@ export default Ember.Component.extend({
 
   showRawInputField: Ember.computed('fieldMapping.mappingType', function() {
     let mappingType = this.get('fieldMapping.mappingType');
-    return mappingType === MAPPING_TYPE.PASSTHROUGH || mappingType === MAPPING_TYPE.FUNCTION;
+    return mappingType === MAPPING_TYPE.RENAME || mappingType === MAPPING_TYPE.FUNCTION;
   }),
 
   showConversionFunction: Ember.computed('fieldMapping.mappingType', function() {
