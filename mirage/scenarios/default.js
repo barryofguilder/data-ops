@@ -116,4 +116,16 @@ export default function(server) {
       channel
     });
   }
+
+  // Clear out mappings for the last channel
+  let mappings = server.db.fieldMappings.where({ channelId: channels.length });
+  for (let i = 0; i < mappings.length; i++) {
+    server.db.fieldMappings.update(mappings[i].id, {
+      mappingType: null,
+      rawField: null,
+      codeset: null,
+      conversionFunction: null,
+      customMapping: null
+    });
+  }
 }
