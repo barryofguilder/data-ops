@@ -4,6 +4,7 @@ import MAPPING_TYPE from 'data-ops/utils/mapping-type-constants';
 import ConversionSummary from 'data-ops/utils/conversion-summary';
 
 export default DS.Model.extend({
+  fieldType: DS.attr('string'),
   name: DS.attr('string'),
   mappingType: DS.attr('string'),
   rawField: DS.attr('string'),

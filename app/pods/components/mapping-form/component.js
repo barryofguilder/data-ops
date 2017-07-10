@@ -1,12 +1,37 @@
 import Ember from 'ember';
 import stateFor from 'ember-state-services/state-for';
 import MAPPING_TYPE from 'data-ops/utils/mapping-type-constants';
+import FIELD_TYPE from 'data-ops/utils/field-type-constants';
+
+const PATIENT_INPUT_FIELDS = [
+  'Addr1',
+  'Addr2',
+  'City',
+  'DOB',
+  'Email',
+  'MRN',
+  'Sex',
+  'ST',
+  'Zip'
+];
+const ENCOUNTER_INPUT_FIELDS = [
+  'AdmitDate',
+  'AdmitSource',
+  'FacilityId'
+];
 
 export default Ember.Component.extend({
   model: null,
   close: null,
 
   fieldMapping: stateFor('field-mapping', 'model'),
+  fieldType: Ember.computed('model.fieldType', function() {
+    if (this.get('model.fieldType') === FIELD_TYPE.ENCOUNTER) {
+      return 'Encounter';
+    }
+
+    return 'Patient';
+  }),
   mappingTypes: [{
     id: MAPPING_TYPE.NOT_MAPPED,
     name: 'Not Mapped'
@@ -20,20 +45,13 @@ export default Ember.Component.extend({
     id: MAPPING_TYPE.CUSTOM,
     name: 'Custom'
   }],
-  rawInputFields: [
-    'Addr1',
-    'Addr2',
-    'AdmitDate',
-    'AdmitSource',
-    'City',
-    'DOB',
-    'Email',
-    'FacilityId',
-    'MRN',
-    'Sex',
-    'ST',
-    'Zip'
-  ],
+  rawInputFields: Ember.computed('model.fieldType', function() {
+    if (this.get('model.fieldType') === FIELD_TYPE.ENCOUNTER) {
+      return ENCOUNTER_INPUT_FIELDS;
+    }
+
+    return PATIENT_INPUT_FIELDS;
+  }),
   conversionFunctions: [
     'date_YYYYMMDDhhmm(<input>)',
     'date_YYYYMMDDhhmmss(<input>)'

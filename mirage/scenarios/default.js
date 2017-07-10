@@ -1,4 +1,5 @@
 import MAPPING_TYPE from 'data-ops/utils/mapping-type-constants';
+import FIELD_TYPE from 'data-ops/utils/field-type-constants';
 
 export default function(server) {
 
@@ -13,6 +14,7 @@ export default function(server) {
     let channel = channels[i];
 
     server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
       name: 'PatientBK',
       mappingType: MAPPING_TYPE.CUSTOM,
       customMapping: 'CONCAT_WS(\'\',MRN,DOB)',
@@ -20,6 +22,7 @@ export default function(server) {
     });
 
     server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressCity',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
       rawField: 'City',
@@ -27,6 +30,7 @@ export default function(server) {
     });
 
     server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressPostalCode',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
       rawField: 'Zip',
@@ -34,6 +38,7 @@ export default function(server) {
     });
 
     server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressState',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
       rawField: 'ST',
@@ -41,6 +46,7 @@ export default function(server) {
     });
 
     server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
       name: 'DateOfBirth',
       mappingType: MAPPING_TYPE.FUNCTION,
       rawField: 'DOB',
@@ -49,13 +55,47 @@ export default function(server) {
     });
 
     server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
       name: 'EthnicGroup',
       mappingType: MAPPING_TYPE.NOT_MAPPED,
       channel
     });
 
     server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
       name: 'InsurancePlanType',
+      mappingType: MAPPING_TYPE.NOT_MAPPED,
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.ENCOUNTER,
+      name: 'AdmitDateTime',
+      mappingType: MAPPING_TYPE.FUNCTION,
+      rawField: 'AdmitDate',
+      conversionFunction: 'date_YYYYMMDDhhmmss(<input>)',
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.ENCOUNTER,
+      name: 'AdmitSource',
+      mappingType: MAPPING_TYPE.PASSTHROUGH,
+      rawField: 'AdmitSource',
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.ENCOUNTER,
+      name: 'FacilityID',
+      mappingType: MAPPING_TYPE.PASSTHROUGH,
+      rawField: 'FacilityId',
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.ENCOUNTER,
+      name: 'AdmittingDoctorID',
       mappingType: MAPPING_TYPE.NOT_MAPPED,
       channel
     });

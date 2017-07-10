@@ -20,7 +20,7 @@
                 {{fa-icon "cog"}}
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#" {{action (mut patientFieldToBeEdited) field}}>
+                <a class="dropdown-item" href="#" {{action (mut fieldToBeEdited) field}}>
                   Edit Mapping
                 </a>
               </div>
@@ -32,9 +32,41 @@
   {{/data-table}}
 {{/mapping-section}}
 
-{{#if patientFieldToBeEdited}}
+{{#mapping-section title="ODS Encounter Fields"}}
+  {{#data-table}}
+    <thead>
+      <tr>
+        <th>Encounter Field</th>
+        <th>RAW Input Field Mapping</th>
+        <th class="col-options"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model.encounterFields as |field|}}
+        <tr>
+          <td>{{field.name}}</td>
+          <td>{{field.rawInputMapping}}</td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                {{fa-icon "cog"}}
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#" {{action (mut fieldToBeEdited) field}}>
+                  Edit Mapping
+                </a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  {{/data-table}}
+{{/mapping-section}}
+
+{{#if fieldToBeEdited}}
   {{mapping-form
-    model=patientFieldToBeEdited
-    close=(action (mut patientFieldToBeEdited) null)
+    model=fieldToBeEdited
+    close=(action (mut fieldToBeEdited) null)
   }}
 {{/if}}
