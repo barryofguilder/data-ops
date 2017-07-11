@@ -15,16 +15,10 @@
           <td>{{field.name}}</td>
           <td>{{field.rawInputMapping}}</td>
           <td>
-            <div class="dropdown">
-              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-                {{fa-icon "cog"}}
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#" {{action (mut fieldToBeEdited) field}}>
-                  Edit Mapping
-                </a>
-              </div>
-            </div>
+            <button type="button" class="btn btn-secondary btn-sm" {{action (mut fieldToBeEdited) field}}>
+              {{fa-icon "pencil"}}
+              Edit
+            </button>
           </td>
         </tr>
       {{/each}}
@@ -47,16 +41,10 @@
           <td>{{field.name}}</td>
           <td>{{field.rawInputMapping}}</td>
           <td>
-            <div class="dropdown">
-              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-                {{fa-icon "cog"}}
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#" {{action (mut fieldToBeEdited) field}}>
-                  Edit Mapping
-                </a>
-              </div>
-            </div>
+            <button type="button" class="btn btn-secondary btn-sm" {{action (mut fieldToBeEdited) field}}>
+              {{fa-icon "pencil"}}
+              Edit
+            </button>
           </td>
         </tr>
       {{/each}}

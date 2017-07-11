@@ -86,12 +86,31 @@
       </div>
     {{/if}}
   {{/modal.body}}
-  {{#modal.footer}}
-    <button type="button" class="btn btn-secondary" {{action close}}>
-      Cancel
-    </button>
-    <button type="submit" class="btn btn-primary" {{action "save"}}>
-      Save
-    </button>
+  {{#modal.footer class=(concat "no-flex " componentCssClassName)}}
+    {{#unless promptForReset}}
+      <div class="pull-left">
+        <button type="button" class="btn btn-danger pull-left" {{action (mut promptForReset) true}}>
+          Reset
+        </button>
+      </div>
+      <div class="pull-right">
+        <button type="button" class="btn btn-secondary" {{action close}}>
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" {{action "save"}}>
+          Save
+        </button>
+      </div>
+    {{else}}
+      <div class="pull-right">
+        <p class="reset-text">Are you sure you want to reset this mapping?</p>
+        <button type="button" class="btn btn-secondary" {{action (mut promptForReset) false}}>
+          No
+        </button>
+        <button type="submit" class="btn btn-primary" {{action "reset"}}>
+          Yes
+        </button>
+      </div>
+    {{/unless}}
   {{/modal.footer}}
 {{/nrc-modal}}

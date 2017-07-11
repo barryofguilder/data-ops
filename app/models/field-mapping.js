@@ -19,8 +19,8 @@ export default DS.Model.extend({
 
     if (mappingType === MAPPING_TYPE.CUSTOM) {
       return `Custom: ${this.get('customMapping')}`;
-    } else if (mappingType === MAPPING_TYPE.RENAME) {
-      return `Rename: ${this.get('rawField')}`;
+    } else if (mappingType === MAPPING_TYPE.PASSTHROUGH) {
+      return `Passthrough: ${this.get('rawField')}`;
     } else if (mappingType === MAPPING_TYPE.FUNCTION) {
       let display = conversionFunctionDisplay(this.get('conversionFunction'), this.get('rawField'));
       return `Custom: ${display}`;

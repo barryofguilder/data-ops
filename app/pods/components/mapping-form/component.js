@@ -51,8 +51,8 @@ export default Ember.Component.extend({
     id: MAPPING_TYPE.NOT_MAPPED,
     name: 'Not Mapped'
   }, {
-    id: MAPPING_TYPE.RENAME,
-    name: 'Rename'
+    id: MAPPING_TYPE.PASSTHROUGH,
+    name: 'Passthrough'
   }, {
     id: MAPPING_TYPE.CODESET,
     name: 'Codeset'
@@ -81,10 +81,11 @@ export default Ember.Component.extend({
     'date_YYYYMMDDhhmm(<input>)',
     'date_YYYYMMDDhhmmss(<input>)'
   ],
+  promptForReset: false,
 
   showRawInputField: Ember.computed('fieldMapping.mappingType', function() {
     let mappingType = this.get('fieldMapping.mappingType');
-    return mappingType === MAPPING_TYPE.RENAME || mappingType === MAPPING_TYPE.FUNCTION;
+    return mappingType === MAPPING_TYPE.PASSTHROUGH || mappingType === MAPPING_TYPE.FUNCTION;
   }),
 
   showCodesetField: Ember.computed('fieldMapping.mappingType', function() {
@@ -109,6 +110,18 @@ export default Ember.Component.extend({
 
   actions: {
     save() {
+      this.get('model').setProperties(this.get('fieldMapping'));
+      this.get('close')();
+    },
+
+    reset() {
+      this.get('fieldMapping').setProperties({
+        mappingType: null,
+        rawField: null,
+        codeset: null,
+        conversionFunction: null,
+        customMapping: null
+      });
       this.get('model').setProperties(this.get('fieldMapping'));
       this.get('close')();
     }
