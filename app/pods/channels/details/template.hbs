@@ -25,16 +25,10 @@
     </thead>
     <tbody>
       {{#each filteredPatientFields as |field|}}
-        <tr>
-          <td>{{field.name}}</td>
-          <td>{{field.rawInputMapping}}</td>
-          <td>
-            <button type="button" class="btn btn-secondary btn-sm" {{action (mut fieldToBeEdited) field}}>
-              {{fa-icon "pencil"}}
-              Edit
-            </button>
-          </td>
-        </tr>
+        {{mapping-record
+          model=field
+          onEdit=(action (mut fieldToBeEdited) field)
+        }}
       {{else}}
         <tr>
           <td colspan="3">
@@ -57,16 +51,10 @@
     </thead>
     <tbody>
       {{#each filteredEncounterFields as |field|}}
-        <tr>
-          <td>{{field.name}}</td>
-          <td>{{field.rawInputMapping}}</td>
-          <td>
-            <button type="button" class="btn btn-secondary btn-sm" {{action (mut fieldToBeEdited) field}}>
-              {{fa-icon "pencil"}}
-              Edit
-            </button>
-          </td>
-        </tr>
+        {{mapping-record
+          model=field
+          onEdit=(action (mut fieldToBeEdited) field)
+        }}
       {{else}}
         <tr>
           <td colspan="3">

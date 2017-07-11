@@ -1,0 +1,15 @@
+<td>{{model.name}}</td>
+<td>
+  {{model.rawInputMapping}}
+  {{#if showCodesetWarning}}
+    <button type="button" class="codeset-warning" data-toggle="tooltip" data-placement="top" title="This codeset has not been configured.">
+      {{fa-icon "warning"}}
+    </button>
+  {{/if}}
+</td>
+<td>
+  <button type="button" class="btn btn-secondary btn-sm" {{action onEdit}}>
+    {{fa-icon "pencil"}}
+    Edit
+  </button>
+</td>

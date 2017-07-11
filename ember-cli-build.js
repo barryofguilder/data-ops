@@ -23,7 +23,7 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   // Bootstrap dependency for popovers and tooltips
-  //app.import('bower_components/tether/dist/js/tether.js');
+  app.import('bower_components/tether/dist/js/tether.js');
 
   // Bootstrap
   app.import('bower_components/bootstrap/js/dist/util.js');
@@ -35,7 +35,7 @@ module.exports = function(defaults) {
   //app.import('bower_components/bootstrap/js/dist/modal.js');
   //app.import('bower_components/bootstrap/js/dist/scrollspy.js');
   //app.import('bower_components/bootstrap/js/dist/tab.js');
-  //app.import('bower_components/bootstrap/js/dist/tooltip.js');
+  app.import('bower_components/bootstrap/js/dist/tooltip.js');
   //app.import('bower_components/bootstrap/js/dist/popover.js');
 
   return app.toTree();

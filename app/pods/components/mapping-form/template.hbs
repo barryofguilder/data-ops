@@ -2,7 +2,7 @@
   {{#modal.header close=(action close)}}
     Edit Mapping - {{fieldType}}.{{model.name}}
   {{/modal.header}}
-  {{#modal.body}}
+  {{#modal.body class=componentCssClassName}}
     <div class="form-group row">
       <label for="mapping-type" class="col-sm-4 col-form-label">
         Mapping Type
@@ -38,7 +38,7 @@
           Codeset
         </label>
         <div class="col-sm-8">
-          {{#x-select class="form-control custom-select" id="codeset" value=fieldMapping.codeset action=(action (mut fieldMapping.codeset)) as |xs|}}
+          {{#x-select class="form-control custom-select" id="codeset" value=fieldMapping.codeset action=(action "codesetSelected") as |xs|}}
             {{#xs.option value=""}}Select...{{/xs.option}}
             {{#each codesets as |codeset|}}
               {{#xs.option value=codeset}}{{codeset}}{{/xs.option}}
@@ -46,6 +46,16 @@
           {{/x-select}}
         </div>
       </div>
+
+      {{#unless isCodesetConfigured}}
+        <div class="form-group row">
+          <div class="offset-sm-4 col-sm-8">
+            <div class="alert alert-warning codeset-warning">
+              This codeset has not been configured.
+            </div>
+          </div>
+        </div>
+      {{/unless}}
     {{/if}}
 
     {{#if showConversionFunction}}

@@ -33,7 +33,13 @@ const CODESETS = [
   'Province',
   'Race',
   'TelecommunicationUseCode'
-]
+];
+const CONFIGURED_CODESETS = [
+  'AdministrativeSex',
+  'Language',
+  'MaritalStatus',
+  'Race'
+];
 
 export default Ember.Component.extend({
   model: null,
@@ -82,6 +88,7 @@ export default Ember.Component.extend({
     'date_YYYYMMDDhhmmss(<input>)'
   ],
   promptForReset: false,
+  isCodesetConfigured: true,
 
   showRawInputField: Ember.computed('fieldMapping.mappingType', function() {
     let mappingType = this.get('fieldMapping.mappingType');
@@ -124,6 +131,13 @@ export default Ember.Component.extend({
       });
       this.get('model').setProperties(this.get('fieldMapping'));
       this.get('close')();
+    },
+
+    codesetSelected(codeset) {
+      this.set('fieldMapping.codeset', codeset);
+
+      let isConfigured = CONFIGURED_CODESETS.includes(codeset);
+      this.set('isCodesetConfigured', isConfigured);
     }
   }
 });
