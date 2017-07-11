@@ -78,6 +78,30 @@ export default function(server) {
 
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
+      name: 'PatientClass',
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
+      name: 'PatientNameFamily',
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
+      name: 'PatientNameGiven',
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
+      name: 'PatientNameSecond',
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.PATIENT,
       name: 'PrimaryLanguage',
       mappingType: MAPPING_TYPE.CODESET,
       codeset: 'Language',
@@ -103,16 +127,22 @@ export default function(server) {
 
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.ENCOUNTER,
-      name: 'FacilityID',
-      mappingType: MAPPING_TYPE.PASSTHROUGH,
-      rawField: 'FacilityId',
+      name: 'AdmittingDoctorID',
+      mappingType: MAPPING_TYPE.NOT_MAPPED,
       channel
     });
 
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.ENCOUNTER,
-      name: 'AdmittingDoctorID',
-      mappingType: MAPPING_TYPE.NOT_MAPPED,
+      name: 'DischargesDateTime',
+      channel
+    });
+
+    server.create('field-mapping', {
+      fieldType: FIELD_TYPE.ENCOUNTER,
+      name: 'FacilityID',
+      mappingType: MAPPING_TYPE.PASSTHROUGH,
+      rawField: 'FacilityId',
       channel
     });
   }

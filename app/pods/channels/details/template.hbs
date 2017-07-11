@@ -1,5 +1,19 @@
 {{page-title "Channel Mapping"}}
 
+<div class="page-options">
+  <div class="pull-right">
+    <p class="mapping-filter-label">Show:</p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary {{allRecordsButtonClass}}" {{action (mut showAllRecords) true}}>
+        All
+      </button>
+      <button type="button" class="btn btn-secondary {{mappedRecordsButtonClass}}" {{action (mut showAllRecords) false}}>
+        Mapped
+      </button>
+    </div>
+  </div>
+</div>
+
 {{#mapping-section title="ODS Patient Fields"}}
   {{#data-table}}
     <thead>
@@ -10,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#each model.patientFields as |field|}}
+      {{#each filteredPatientFields as |field|}}
         <tr>
           <td>{{field.name}}</td>
           <td>{{field.rawInputMapping}}</td>
@@ -19,6 +33,12 @@
               {{fa-icon "pencil"}}
               Edit
             </button>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="3">
+            <p class="no-records">No patient fields have been mapped.</p>
           </td>
         </tr>
       {{/each}}
@@ -36,7 +56,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#each model.encounterFields as |field|}}
+      {{#each filteredEncounterFields as |field|}}
         <tr>
           <td>{{field.name}}</td>
           <td>{{field.rawInputMapping}}</td>
@@ -45,6 +65,12 @@
               {{fa-icon "pencil"}}
               Edit
             </button>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="3">
+            <p class="no-records">No encounter fields have been mapped.</p>
           </td>
         </tr>
       {{/each}}

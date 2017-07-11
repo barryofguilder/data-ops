@@ -18,3 +18,13 @@ body {
   // Push down the body content due to the fixed navbar
   padding-top: 4.5rem;
 }
+
+// Page Options
+.page-options {
+  @include clearfix();
+}
+
+.mapping-filter-label {
+  display: inline-block;
+  margin: 0 1rem 0 0;
+}
