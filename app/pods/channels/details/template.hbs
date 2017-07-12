@@ -72,3 +72,58 @@
     close=(action (mut fieldToBeEdited) null)
   }}
 {{/if}}
+
+{{#mapping-section title="Qualisys Mappings"}}
+  {{#data-table}}
+    <thead>
+      <tr>
+        <th>Mapping</th>
+        <th class="col-options"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each sortedQualisysMappings as |mapping|}}
+        <tr>
+          <td>
+            {{mapping.mappingType}}
+            {{#if mapping.value}}
+              ({{mapping.value}})
+            {{/if}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-secondary btn-sm">
+              {{fa-icon "pencil"}}
+              Edit
+            </button>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="3">
+            <p class="no-records">There are no Qualisys mappings.</p>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    <tfoot class="table-actions">
+      <tr>
+        <td colspan="2">
+          <div class="pull-right">
+            <button type="button" class="btn btn-secondary btn-sm" {{action "addQualisysMapping"}}>
+              {{fa-icon "plus"}}
+              Add Mapping
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  {{/data-table}}
+{{/mapping-section}}
+
+{{#if qualisysMappingToBeEdited}}
+  {{qualisys-form
+    model=qualisysMappingToBeEdited
+    existingMappings=filteredQualisysMappings
+    close=(action (mut qualisysMappingToBeEdited) null)
+  }}
+{{/if}}

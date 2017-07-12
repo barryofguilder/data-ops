@@ -1,0 +1,44 @@
+{{#nrc-modal as |modal|}}
+  {{#modal.header close=(action close)}}
+    Add Qualisys Mapping
+  {{/modal.header}}
+  {{#modal.body}}
+    <div class="form-group row">
+      <label for="mapping-type" class="col-sm-4 col-form-label">
+        Mapping Type
+      </label>
+      <div class="col-sm-8">
+        {{#x-select class="form-control custom-select" id="mapping-type" value=qualisysMapping.mappingType action=(action (mut qualisysMapping.mappingType)) as |xs|}}
+          {{#xs.option value=""}}Select...{{/xs.option}}
+          {{#each mappingTypes as |mappingType|}}
+            {{#xs.option value=mappingType}}{{mappingType}}{{/xs.option}}
+          {{/each}}
+        {{/x-select}}
+      </div>
+    </div>
+
+    {{#if showMappingValue}}
+      <div class="form-group row">
+        <label for="mapping-value" class="col-sm-4 col-form-label">
+          Value
+        </label>
+        <div class="col-sm-8">
+          {{#x-select class="form-control custom-select" id="mapping-value" value=qualisysMapping.value action=(action (mut qualisysMapping.value)) as |xs|}}
+            {{#xs.option value=""}}Select...{{/xs.option}}
+            {{#each mappingValues as |mappingValue|}}
+              {{#xs.option value=mappingValue}}{{mappingValue}}{{/xs.option}}
+            {{/each}}
+          {{/x-select}}
+        </div>
+      </div>
+    {{/if}}
+  {{/modal.body}}
+  {{#modal.footer}}
+    <button type="button" class="btn btn-secondary" {{action close}}>
+      Cancel
+    </button>
+    <button type="submit" class="btn btn-primary" {{action "save"}}>
+      Save
+    </button>
+  {{/modal.footer}}
+{{/nrc-modal}}

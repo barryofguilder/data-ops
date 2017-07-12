@@ -1,5 +1,6 @@
 import MAPPING_TYPE from 'data-ops/utils/mapping-type-constants';
 import FIELD_TYPE from 'data-ops/utils/field-type-constants';
+import QUALISYS_MAPPING_TYPE from 'data-ops/utils/qualisys-mapping-constants';
 
 export default function(server) {
 
@@ -145,12 +146,20 @@ export default function(server) {
       rawField: 'FacilityId',
       channel
     });
+
+    // Don't add the Qualisys mappings for the last channel
+    if (i < channels.length-1){
+      server.create('qualisys-mapping', {
+        mappingType: QUALISYS_MAPPING_TYPE.H_CAT_AGE,
+        channel
+      });
+    }
   }
 
   // Clear out mappings for the last channel
-  let mappings = server.db.fieldMappings.where({ channelId: channels.length });
-  for (let i = 0; i < mappings.length; i++) {
-    server.db.fieldMappings.update(mappings[i].id, {
+  let fieldMappings = server.db.fieldMappings.where({ channelId: channels.length });
+  for (let i = 0; i < fieldMappings.length; i++) {
+    server.db.fieldMappings.update(fieldMappings[i].id, {
       mappingType: null,
       rawField: null,
       codeset: null,

@@ -28,4 +28,8 @@ export default function() {
   this.get('/channels/:id');
 
   this.get('/patient-fields/:id');
+
+  this.get('/qualisys-mappings/:id');
+  this.post('/qualisys-mappings');
+  this.patch('/qualisys-mappings/:id');
 }

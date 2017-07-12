@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  store: Ember.inject.service(),
+
   fieldToBeEdited: null,
+  qualisysMappingToBeEdited: null,
   showAllRecords: true,
 
   allRecordsButtonClass: Ember.computed('showAllRecords', function() {
@@ -33,5 +36,20 @@ export default Ember.Controller.extend({
     return encounterFields.filter((field) => {
       return Ember.isPresent(field.get('mappingType'));
     });
-  })
+  }),
+
+  filteredQualisysMappings: Ember.computed('model.qualisysMappings.@each.isNew', function() {
+    return this.get('model.qualisysMappings').filterBy('isNew', false);
+  }),
+  qualisysMappingsSort: ['mappingType'],
+  sortedQualisysMappings: Ember.computed.sort('filteredQualisysMappings', 'qualisysMappingsSort'),
+
+  actions: {
+    addQualisysMapping() {
+      let channel = this.get('model');
+      let mapping = this.get('store').createRecord('qualisys-mapping', { channel });
+
+      this.set('qualisysMappingToBeEdited', mapping);
+    }
+  }
 });

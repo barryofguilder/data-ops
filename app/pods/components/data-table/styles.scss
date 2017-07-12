@@ -31,7 +31,9 @@
   td {
     border-top: none;
     border-right: $table-border-width solid $table-column-border;
+  }
 
+  tbody td {
     &:last-child {
       border-right: none;
     }
@@ -45,4 +47,8 @@
 .no-records {
   margin: .5rem 0;
   text-align: center;
+}
+
+.table-actions {
+  background: darken($table-header-border, 2%);
 }
