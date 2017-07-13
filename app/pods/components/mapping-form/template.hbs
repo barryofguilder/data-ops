@@ -1,6 +1,6 @@
 {{#nrc-modal as |modal|}}
   {{#modal.header close=(action close)}}
-    Edit Mapping - {{fieldType}}.{{model.name}}
+    Channel Mapping - {{fieldType}}.{{model.name}}
   {{/modal.header}}
   {{#modal.body class=componentCssClassName}}
     <div class="form-group row">
@@ -15,22 +15,6 @@
         {{/x-select}}
       </div>
     </div>
-
-    {{#if showRawInputField}}
-      <div class="form-group row">
-        <label for="raw-input-field" class="col-sm-4 col-form-label">
-          RAW Input Field
-        </label>
-        <div class="col-sm-8">
-          {{#x-select class="form-control custom-select" id="raw-input-field" value=fieldMapping.rawField action=(action (mut fieldMapping.rawField)) as |xs|}}
-            {{#xs.option value=""}}Select...{{/xs.option}}
-            {{#each rawInputFields as |rawInputField|}}
-              {{#xs.option value=rawInputField}}{{rawInputField}}{{/xs.option}}
-            {{/each}}
-          {{/x-select}}
-        </div>
-      </div>
-    {{/if}}
 
     {{#if showCodesetField}}
       <div class="form-group row">
@@ -79,7 +63,7 @@
         </label>
         <div class="col-sm-8">
           <p class="form-control-static">
-            {{conversion-summary fieldMapping.conversionFunction rawField=fieldMapping.rawField}}
+            {{conversion-summary fieldMapping.conversionFunction fieldName=model.name}}
           </p>
         </div>
       </div>

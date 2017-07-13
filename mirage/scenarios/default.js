@@ -16,14 +16,6 @@ export default function(server) {
 
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
-      name: 'PatientBK',
-      mappingType: MAPPING_TYPE.CUSTOM,
-      customMapping: 'CONCAT_WS(\'\',MRN,DOB)',
-      channel
-    });
-
-    server.create('field-mapping', {
-      fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressCity',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
       rawField: 'City',
@@ -65,6 +57,7 @@ export default function(server) {
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'Gender',
+      rawField: 'Sex',
       mappingType: MAPPING_TYPE.CODESET,
       codeset: 'AdministrativeSex',
       channel
@@ -104,6 +97,7 @@ export default function(server) {
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'PrimaryLanguage',
+      rawField: 'Language',
       mappingType: MAPPING_TYPE.CODESET,
       codeset: 'Language',
       channel

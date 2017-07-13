@@ -3,22 +3,6 @@ import stateFor from 'ember-state-services/state-for';
 import MAPPING_TYPE from 'data-ops/utils/mapping-type-constants';
 import FIELD_TYPE from 'data-ops/utils/field-type-constants';
 
-const PATIENT_INPUT_FIELDS = [
-  'Addr1',
-  'Addr2',
-  'City',
-  'DOB',
-  'Email',
-  'MRN',
-  'Sex',
-  'ST',
-  'Zip'
-];
-const ENCOUNTER_INPUT_FIELDS = [
-  'AdmitDate',
-  'AdmitSource',
-  'FacilityId'
-];
 const CODESETS = [
   'AdministrativeSex',
   'AdmissionType',
@@ -69,13 +53,6 @@ export default Ember.Component.extend({
     id: MAPPING_TYPE.CUSTOM,
     name: 'Custom'
   }],
-  rawInputFields: Ember.computed('model.fieldType', function() {
-    if (this.get('model.fieldType') === FIELD_TYPE.ENCOUNTER) {
-      return ENCOUNTER_INPUT_FIELDS;
-    }
-
-    return PATIENT_INPUT_FIELDS;
-  }),
   codesets: Ember.computed('model.fieldType', function() {
     if (this.get('model.fieldType') === FIELD_TYPE.ENCOUNTER) {
       return CODESETS;
@@ -89,11 +66,6 @@ export default Ember.Component.extend({
   ],
   promptForReset: false,
   isCodesetConfigured: true,
-
-  showRawInputField: Ember.computed('fieldMapping.mappingType', function() {
-    let mappingType = this.get('fieldMapping.mappingType');
-    return mappingType === MAPPING_TYPE.PASSTHROUGH || mappingType === MAPPING_TYPE.FUNCTION;
-  }),
 
   showCodesetField: Ember.computed('fieldMapping.mappingType', function() {
     let mappingType = this.get('fieldMapping.mappingType');
@@ -111,7 +83,7 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
 
-    let mappingProperties = this.get('model').getProperties('mappingType', 'rawField', 'codeset', 'conversionFunction', 'customMapping');
+    let mappingProperties = this.get('model').getProperties('mappingType', 'codeset', 'conversionFunction', 'customMapping');
     this.get('fieldMapping').setProperties(mappingProperties);
   },
 
@@ -124,7 +96,6 @@ export default Ember.Component.extend({
     reset() {
       this.get('fieldMapping').setProperties({
         mappingType: null,
-        rawField: null,
         codeset: null,
         conversionFunction: null,
         customMapping: null

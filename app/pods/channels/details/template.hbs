@@ -14,123 +14,223 @@
   </div>
 </div>
 
-{{#mapping-section title="ODS Patient Fields"}}
-  {{#data-table}}
-    <thead>
-      <tr>
-        <th>Patient Field</th>
-        <th>RAW Input Field Mapping</th>
-        <th class="col-options"></th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each filteredPatientFields as |field|}}
-        {{mapping-record
-          model=field
-          onEdit=(action (mut fieldToBeEdited) field)
-        }}
-      {{else}}
-        <tr>
-          <td colspan="3">
-            <p class="no-records">No patient fields have been mapped.</p>
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  {{/data-table}}
-{{/mapping-section}}
+{{#collapsible-panel as |p|}}
+  {{#p.header}}
+    Channel Settings
+  {{/p.header}}
+  {{#p.body}}
+    Nothing to see here, move along :)
+  {{/p.body}}
+{{/collapsible-panel}}
 
-{{#mapping-section title="ODS Encounter Fields"}}
-  {{#data-table}}
-    <thead>
-      <tr>
-        <th>Encounter Field</th>
-        <th>RAW Input Field Mapping</th>
-        <th class="col-options"></th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each filteredEncounterFields as |field|}}
-        {{mapping-record
-          model=field
-          onEdit=(action (mut fieldToBeEdited) field)
-        }}
-      {{else}}
-        <tr>
-          <td colspan="3">
-            <p class="no-records">No encounter fields have been mapped.</p>
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  {{/data-table}}
-{{/mapping-section}}
+{{#collapsible-panel as |p|}}
+  {{#p.header}}
+    Business Keys
+  {{/p.header}}
+  {{#p.body}}
+    Nothing to see here, move along :)
+  {{/p.body}}
+{{/collapsible-panel}}
 
-{{#if fieldToBeEdited}}
-  {{mapping-form
-    model=fieldToBeEdited
-    close=(action (mut fieldToBeEdited) null)
-  }}
-{{/if}}
+{{#collapsible-panel as |p|}}
+  {{#p.header}}
+    Raw Column Mappings
+  {{/p.header}}
+  {{#p.body}}
+    {{#mapping-section title="ODS Patient Fields"}}
+      {{#data-table}}
+        <thead>
+          <tr>
+            <th>Patient Field</th>
+            <th>RAW Field</th>
+            <th class="col-options"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each filteredPatientRawFields as |field|}}
+            {{mapping-raw-record
+              model=field
+              onEdit=(action (mut rawFieldToBeEdited) field)
+            }}
+          {{else}}
+            <tr>
+              <td colspan="3">
+                <p class="no-records">No patient fields have been mapped.</p>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      {{/data-table}}
+    {{/mapping-section}}
 
-{{#mapping-section title="Qualisys Mappings"}}
-  {{#data-table}}
-    <thead>
-      <tr>
-        <th>Mapping</th>
-        <th class="col-options"></th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each sortedQualisysMappings as |mapping|}}
-        <tr>
-          <td>
-            {{mapping.mappingType}}
-            {{#if mapping.value}}
-              ({{mapping.value}})
-            {{/if}}
-          </td>
-          <td>
-            {{#if mapping.value}}
-              <button type="button" class="btn btn-secondary btn-sm" {{action (mut qualisysMappingToBeEdited) mapping}}>
-                {{fa-icon "pencil"}}
-                Edit
-              </button>
-            {{else}}
-              <button type="button" class="btn btn-danger btn-sm" {{action "removeQualisysMapping" mapping}}>
-                {{fa-icon "trash"}}
-                Remove
-              </button>
-            {{/if}}
-          </td>
-        </tr>
-      {{else}}
-        <tr>
-          <td colspan="3">
-            <p class="no-records">There are no Qualisys mappings.</p>
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-    <tfoot class="table-actions">
-      <tr>
-        <td colspan="2">
-          <div class="pull-right">
-            <button type="button" class="btn btn-secondary btn-sm" {{action "addQualisysMapping"}}>
-              {{fa-icon "plus"}}
-              Add Mapping
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tfoot>
-  {{/data-table}}
-{{/mapping-section}}
+    {{#mapping-section title="ODS Encounter Fields"}}
+      {{#data-table}}
+        <thead>
+          <tr>
+            <th>Encounter Field</th>
+            <th>RAW Field</th>
+            <th class="col-options"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each filteredEncounterRawFields as |field|}}
+            {{mapping-record
+              model=field
+              onEdit=(action (mut rawFieldToBeEdited) field)
+            }}
+          {{else}}
+            <tr>
+              <td colspan="3">
+                <p class="no-records">No encounter fields have been mapped.</p>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      {{/data-table}}
+    {{/mapping-section}}
 
-{{#if qualisysMappingToBeEdited}}
-  {{qualisys-form
-    model=qualisysMappingToBeEdited
-    existingMappings=filteredQualisysMappings
-    close=(action (mut qualisysMappingToBeEdited) null)
-  }}
-{{/if}}
+    {{#if rawFieldToBeEdited}}
+      {{mapping-raw-form
+        model=rawFieldToBeEdited
+        close=(action (mut rawFieldToBeEdited) null)
+      }}
+    {{/if}}
+  {{/p.body}}
+{{/collapsible-panel}}
+
+{{#collapsible-panel as |p|}}
+  {{#p.header}}
+    Codesets
+  {{/p.header}}
+  {{#p.body}}
+    Nothing to see here, move along :)
+  {{/p.body}}
+{{/collapsible-panel}}
+
+{{#collapsible-panel as |p|}}
+  {{#p.header}}
+    Channel Mappings
+  {{/p.header}}
+  {{#p.body}}
+    {{#mapping-section title="ODS Patient Fields"}}
+      {{#data-table}}
+        <thead>
+          <tr>
+            <th>Patient Field</th>
+            <th>Mapping</th>
+            <th class="col-options"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each filteredPatientFields as |field|}}
+            {{mapping-record
+              model=field
+              onEdit=(action (mut fieldToBeEdited) field)
+            }}
+          {{else}}
+            <tr>
+              <td colspan="3">
+                <p class="no-records">No patient fields have been mapped.</p>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      {{/data-table}}
+    {{/mapping-section}}
+
+    {{#mapping-section title="ODS Encounter Fields"}}
+      {{#data-table}}
+        <thead>
+          <tr>
+            <th>Encounter Field</th>
+            <th>Mapping</th>
+            <th class="col-options"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each filteredEncounterFields as |field|}}
+            {{mapping-record
+              model=field
+              onEdit=(action (mut fieldToBeEdited) field)
+            }}
+          {{else}}
+            <tr>
+              <td colspan="3">
+                <p class="no-records">No encounter fields have been mapped.</p>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      {{/data-table}}
+    {{/mapping-section}}
+
+    {{#mapping-section title="Qualisys Mappings"}}
+      {{#data-table}}
+        <thead>
+          <tr>
+            <th>Mapping</th>
+            <th class="col-options"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each sortedQualisysMappings as |mapping|}}
+            <tr>
+              <td>
+                {{mapping.mappingType}}
+                {{#if mapping.value}}
+                  ({{mapping.value}})
+                {{/if}}
+              </td>
+              <td>
+                {{#if mapping.value}}
+                  <button type="button" class="btn btn-secondary btn-sm" {{action (mut qualisysMappingToBeEdited) mapping}}>
+                    {{fa-icon "pencil"}}
+                    Edit
+                  </button>
+                {{else}}
+                  <button type="button" class="btn btn-danger btn-sm" {{action "removeQualisysMapping" mapping}}>
+                    {{fa-icon "trash"}}
+                    Remove
+                  </button>
+                {{/if}}
+              </td>
+            </tr>
+          {{else}}
+            <tr>
+              <td colspan="3">
+                <p class="no-records">There are no Qualisys mappings.</p>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+        <tfoot class="table-actions">
+          <tr>
+            <td colspan="2">
+              <div class="pull-right">
+                <button type="button" class="btn btn-secondary btn-sm" {{action "addQualisysMapping"}}>
+                  {{fa-icon "plus"}}
+                  Add Mapping
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      {{/data-table}}
+    {{/mapping-section}}
+
+    {{#if fieldToBeEdited}}
+      {{mapping-form
+        model=fieldToBeEdited
+        close=(action (mut fieldToBeEdited) null)
+      }}
+    {{/if}}
+
+    {{#if qualisysMappingToBeEdited}}
+      {{qualisys-form
+        model=qualisysMappingToBeEdited
+        existingMappings=filteredQualisysMappings
+        close=(action (mut qualisysMappingToBeEdited) null)
+      }}
+    {{/if}}
+  {{/p.body}}
+{{/collapsible-panel}}

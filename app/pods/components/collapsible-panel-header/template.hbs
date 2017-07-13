@@ -1,0 +1,12 @@
+<button class="btn btn-sm collapse-btn" type="button" data-toggle="collapse" data-target="#{{panelId}}">
+  {{#if hasBlock}}
+    <h4 class="collapsible-panel-header-text">{{yield}}</h4>
+  {{/if}}
+  <span class="collapsible-panel-icon">
+    {{#if expanded}}
+      {{fa-icon "chevron-up"}}
+    {{else}}
+      {{fa-icon "chevron-down"}}
+    {{/if}}
+  </span>
+</button>

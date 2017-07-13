@@ -1,6 +1,6 @@
-export default function(conversionFunction, rawField) {
-  if (conversionFunction && rawField) {
-    return conversionFunction.replace('<input>', rawField);
+export default function(conversionFunction, fieldName) {
+  if (conversionFunction && fieldName) {
+    return conversionFunction.replace('<input>', fieldName);
   }
 
   return '';

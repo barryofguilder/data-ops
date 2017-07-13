@@ -1,0 +1,4 @@
+{{yield (hash
+  header=(component "collapsible-panel-header" expanded=expanded panelId=panelId)
+  body=(component "collapsible-panel-body" expanded=expanded panelId=panelId onToggle=(action "toggleBody"))
+)}}

@@ -6,23 +6,23 @@ import ConversionSummary from 'data-ops/utils/conversion-summary';
 export default DS.Model.extend({
   fieldType: DS.attr('string'),
   name: DS.attr('string'),
-  mappingType: DS.attr('string'),
   rawField: DS.attr('string'),
+  mappingType: DS.attr('string'),
   codeset: DS.attr('string'),
   conversionFunction: DS.attr('string'),
   customMapping: DS.attr('string'),
 
   channel: DS.belongsTo('channel'),
 
-  rawInputMapping: Ember.computed('mappingType', 'customMapping', 'rawField', 'codeset', 'conversionFunction', function() {
+  rawInputMapping: Ember.computed('name', 'mappingType', 'customMapping', 'codeset', 'conversionFunction', function() {
     let mappingType = this.get('mappingType');
 
     if (mappingType === MAPPING_TYPE.CUSTOM) {
       return `Custom: ${this.get('customMapping')}`;
     } else if (mappingType === MAPPING_TYPE.PASSTHROUGH) {
-      return `Passthrough: ${this.get('rawField')}`;
+      return `Passthrough: ${this.get('name')}`;
     } else if (mappingType === MAPPING_TYPE.FUNCTION) {
-      let display = conversionFunctionDisplay(this.get('conversionFunction'), this.get('rawField'));
+      let display = conversionFunctionDisplay(this.get('conversionFunction'), this.get('name'));
       return `Custom: ${display}`;
     } else if (mappingType === MAPPING_TYPE.CODESET) {
       return `Codeset: ${this.get('codeset')}`;
@@ -34,6 +34,6 @@ export default DS.Model.extend({
   })
 });
 
-function conversionFunctionDisplay(conversionFunction, rawField) {
-  return ConversionSummary(conversionFunction, rawField);
+function conversionFunctionDisplay(conversionFunction, fieldName) {
+  return ConversionSummary(conversionFunction, fieldName);
 }
