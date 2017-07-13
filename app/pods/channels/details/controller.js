@@ -50,6 +50,10 @@ export default Ember.Controller.extend({
       let mapping = this.get('store').createRecord('qualisys-mapping', { channel });
 
       this.set('qualisysMappingToBeEdited', mapping);
+    },
+
+    removeQualisysMapping(mapping) {
+      mapping.destroyRecord();
     }
   }
 });

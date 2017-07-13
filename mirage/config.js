@@ -32,4 +32,5 @@ export default function() {
   this.get('/qualisys-mappings/:id');
   this.post('/qualisys-mappings');
   this.patch('/qualisys-mappings/:id');
+  this.del('/qualisys-mappings/:id');
 }

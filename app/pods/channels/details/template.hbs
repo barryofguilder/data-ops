@@ -91,10 +91,17 @@
             {{/if}}
           </td>
           <td>
-            <button type="button" class="btn btn-secondary btn-sm">
-              {{fa-icon "pencil"}}
-              Edit
-            </button>
+            {{#if mapping.value}}
+              <button type="button" class="btn btn-secondary btn-sm" {{action (mut qualisysMappingToBeEdited) mapping}}>
+                {{fa-icon "pencil"}}
+                Edit
+              </button>
+            {{else}}
+              <button type="button" class="btn btn-danger btn-sm" {{action "removeQualisysMapping" mapping}}>
+                {{fa-icon "trash"}}
+                Remove
+              </button>
+            {{/if}}
           </td>
         </tr>
       {{else}}

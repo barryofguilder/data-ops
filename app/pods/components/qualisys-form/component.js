@@ -54,6 +54,11 @@ export default Ember.Component.extend({
       model.save();
 
       this.get('close')();
+    },
+
+    removeQualisysMapping() {
+      this.get('model').destroyRecord();
+      this.get('close')();
     }
   }
 });

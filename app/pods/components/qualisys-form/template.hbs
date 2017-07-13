@@ -1,6 +1,10 @@
 {{#nrc-modal as |modal|}}
   {{#modal.header close=(action close)}}
-    Add Qualisys Mapping
+    {{#if model.isNew}}
+      Add Qualisys Mapping
+    {{else}}
+      Edit Qualisys Mapping
+    {{/if}}
   {{/modal.header}}
   {{#modal.body}}
     <div class="form-group row">
@@ -8,12 +12,16 @@
         Mapping Type
       </label>
       <div class="col-sm-8">
-        {{#x-select class="form-control custom-select" id="mapping-type" value=qualisysMapping.mappingType action=(action (mut qualisysMapping.mappingType)) as |xs|}}
-          {{#xs.option value=""}}Select...{{/xs.option}}
-          {{#each mappingTypes as |mappingType|}}
-            {{#xs.option value=mappingType}}{{mappingType}}{{/xs.option}}
-          {{/each}}
-        {{/x-select}}
+        {{#if model.isNew}}
+          {{#x-select class="form-control custom-select" id="mapping-type" value=qualisysMapping.mappingType action=(action (mut qualisysMapping.mappingType)) as |xs|}}
+            {{#xs.option value=""}}Select...{{/xs.option}}
+            {{#each mappingTypes as |mappingType|}}
+              {{#xs.option value=mappingType}}{{mappingType}}{{/xs.option}}
+            {{/each}}
+          {{/x-select}}
+        {{else}}
+          <p class="form-control-static">{{model.mappingType}}</p>
+        {{/if}}
       </div>
     </div>
 
@@ -33,12 +41,21 @@
       </div>
     {{/if}}
   {{/modal.body}}
-  {{#modal.footer}}
-    <button type="button" class="btn btn-secondary" {{action close}}>
-      Cancel
-    </button>
-    <button type="submit" class="btn btn-primary" {{action "save"}}>
-      Save
-    </button>
+  {{#modal.footer class=(concat "no-flex " componentCssClassName)}}
+    {{#unless model.isNew}}
+      <div class="pull-left">
+        <button type="button" class="btn btn-danger pull-left" {{action "removeQualisysMapping"}}>
+          Remove
+        </button>
+      </div>
+    {{/unless}}
+    <div class="pull-right">
+      <button type="button" class="btn btn-secondary" {{action close}}>
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary" {{action "save"}}>
+        Save
+      </button>
+    </div>
   {{/modal.footer}}
 {{/nrc-modal}}
