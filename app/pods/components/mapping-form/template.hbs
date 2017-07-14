@@ -48,14 +48,35 @@
           Conversion Function
         </label>
         <div class="col-sm-8">
-          {{#x-select class="form-control custom-select" id="conversion-function" value=fieldMapping.conversionFunction action=(action (mut fieldMapping.conversionFunction)) as |xs|}}
+          {{#x-select class="form-control custom-select" id="conversion-function" value=fieldMapping.conversionFunction.id action=(action "conversionFunctionSelected") as |xs|}}
             {{#xs.option value=""}}Select...{{/xs.option}}
-            {{#each conversionFunctions as |conversionFunction|}}
-              {{#xs.option value=conversionFunction}}{{conversionFunction}}{{/xs.option}}
+            {{#each sortedConversionFunctions as |conversionFunction|}}
+              {{#xs.option value=conversionFunction.id}}{{conversionFunction.name}}{{/xs.option}}
             {{/each}}
           {{/x-select}}
         </div>
       </div>
+
+      {{#if showConversionFunctionParams}}
+        {{#each fieldMapping.conversionFunctionParams as |param|}}
+          {{function-param
+            paramFields=paramFields
+            existingFields=fieldMapping.conversionFunctionParams
+            selectedParam=param
+            onSelect=(action "conversionFunctionParamSelected")
+            onRemove=(action "conversionFunctionParamRemoved")
+          }}
+        {{/each}}
+
+        <div class="form-group row">
+          <div class="offset-sm-4 col-sm-8">
+            <button type="button" class="btn btn-secondary btn-sm" {{action "addConversionFunctionParam"}}>
+              {{fa-icon "plus"}}
+              Add Input Field
+            </button>
+          </div>
+        </div>
+      {{/if}}
 
       <div class="form-group row">
         <label class="col-sm-4 col-form-label">
@@ -63,7 +84,11 @@
         </label>
         <div class="col-sm-8">
           <p class="form-control-static">
-            {{conversion-summary fieldMapping.conversionFunction fieldName=model.name}}
+            {{conversion-summary
+              fieldMapping.conversionFunction
+              fieldName=model.name
+              fieldParams=selectedParamFields
+            }}
           </p>
         </div>
       </div>

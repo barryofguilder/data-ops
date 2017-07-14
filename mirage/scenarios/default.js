@@ -9,6 +9,21 @@ export default function(server) {
     This data will not be loaded in your tests.
   */
 
+  server.create('conversion-function', {
+    name: 'date_YYYYMMDDhhmm(<input>)',
+    multipleParams: false
+  });
+
+  let conversionFunction1 = server.create('conversion-function', {
+    name: 'date_YYYYMMDDhhmmss(<input>)',
+    multipleParams: false
+  });
+
+  server.create('conversion-function', {
+    name: 'Combine(<input1>, <input2>, ...)',
+    multipleParams: true
+  });
+
   let channels = server.createList('channel', 6);
 
   for (let i = 0; i < channels.length; i++) {
@@ -43,7 +58,7 @@ export default function(server) {
       name: 'DateOfBirth',
       mappingType: MAPPING_TYPE.FUNCTION,
       rawField: 'DOB',
-      conversionFunction: 'date_YYYYMMDDhhmmss(<input>)',
+      conversionFunction: conversionFunction1,
       channel
     });
 
@@ -108,7 +123,7 @@ export default function(server) {
       name: 'AdmitDateTime',
       mappingType: MAPPING_TYPE.FUNCTION,
       rawField: 'AdmitDate',
-      conversionFunction: 'date_YYYYMMDDhhmmss(<input>)',
+      conversionFunction: conversionFunction1,
       channel
     });
 
