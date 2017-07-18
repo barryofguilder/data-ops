@@ -1,18 +1,16 @@
 {{page-title "Channel Mapping"}}
 
-<div class="page-options">
-  <div class="pull-right">
-    <p class="mapping-filter-label">Show:</p>
-    <div class="btn-group">
-      <button type="button" class="btn btn-secondary {{allRecordsButtonClass}}" {{action (mut showAllRecords) true}}>
-        All
-      </button>
-      <button type="button" class="btn btn-secondary {{mappedRecordsButtonClass}}" {{action (mut showAllRecords) false}}>
-        Mapped
-      </button>
-    </div>
+{{#page-options}}
+  <label class="page-option-label">Show Mappings:</label>
+  <div class="btn-group">
+    <button type="button" class="btn btn-secondary {{allRecordsButtonClass}}" {{action (mut showAllRecords) true}}>
+      All
+    </button>
+    <button type="button" class="btn btn-secondary {{mappedRecordsButtonClass}}" {{action (mut showAllRecords) false}}>
+      Configured
+    </button>
   </div>
-</div>
+{{/page-options}}
 
 {{#collapsible-panel as |p|}}
   {{#p.header}}

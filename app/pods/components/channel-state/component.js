@@ -13,7 +13,7 @@ export default Ember.Component.extend({
     if (state === CHANNEL_STATE.ACTIVE) {
       return 'badge-success';
     } else if (state === CHANNEL_STATE.INACTIVE) {
-      return 'badge-danger';
+      return 'badge-default';
     } else if (state === CHANNEL_STATE.DEBUG) {
       return 'badge-warning';
     }
