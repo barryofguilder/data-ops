@@ -25,7 +25,28 @@
 
 {{#collapsible-panel as |p|}}
   {{#p.header}}
-    Business Keys
+    Input File Headers
+  {{/p.header}}
+  {{#p.body}}
+    {{!--
+      Show table with "Column Number" and "Name".
+    --}}
+    Nothing to see here, move along :)
+  {{/p.body}}
+{{/collapsible-panel}}
+
+{{#collapsible-panel as |p|}}
+  {{#p.header}}
+    Codesets
+  {{/p.header}}
+  {{#p.body}}
+    Nothing to see here, move along :)
+  {{/p.body}}
+{{/collapsible-panel}}
+
+{{#collapsible-panel as |p|}}
+  {{#p.header}}
+    Business Key Mappings
   {{/p.header}}
   {{#p.body}}
     Nothing to see here, move along :)
@@ -37,7 +58,16 @@
     Raw Column Mappings
   {{/p.header}}
   {{#p.body}}
-    {{#mapping-section title="ODS Patient Fields"}}
+    {{!--
+      Show 'View RAW File Format' button that will show a modal with the
+      RAW colunn names and the ordianal position in the file.
+    --}}
+    {{!--
+      When starting a new channel, don't show these tables. Instead, show a button
+      that says "Upload RAW headers" that will then take the columns and then
+      show the tables.
+    --}}
+    {{#mapping-section title="Patient Fields"}}
       {{#data-table}}
         <thead>
           <tr>
@@ -63,7 +93,7 @@
       {{/data-table}}
     {{/mapping-section}}
 
-    {{#mapping-section title="ODS Encounter Fields"}}
+    {{#mapping-section title="Encounter Fields"}}
       {{#data-table}}
         <thead>
           <tr>
@@ -95,15 +125,6 @@
         close=(action (mut rawFieldToBeEdited) null)
       }}
     {{/if}}
-  {{/p.body}}
-{{/collapsible-panel}}
-
-{{#collapsible-panel as |p|}}
-  {{#p.header}}
-    Codesets
-  {{/p.header}}
-  {{#p.body}}
-    Nothing to see here, move along :)
   {{/p.body}}
 {{/collapsible-panel}}
 

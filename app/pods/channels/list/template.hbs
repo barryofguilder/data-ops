@@ -1,9 +1,27 @@
 {{page-title "Channels"}}
 
-<ul class="list-group">
-  {{#each sortedChannels as |channel|}}
-    {{#link-to "channels.details" channel.id class="list-group-item list-group-item-action"}}
-      {{channel.name}}
-    {{/link-to}}
-  {{/each}}
-</ul>
+{{#data-table}}
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="col-channel-state">State</th>
+      <th class="col-options"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each sortedChannels as |channel|}}
+      <tr>
+        <td>{{channel.name}}</td>
+        <td>
+          {{channel-state state=channel.state}}
+        </td>
+        <td>
+          {{#link-to "channels.details" channel.id class="btn btn-secondary btn-sm"}}
+            {{fa-icon "search"}}
+            View
+          {{/link-to}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+{{/data-table}}
