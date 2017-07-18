@@ -1,5 +1,6 @@
 export default {
-  ACTIVE: 'Active',
+  LIVE: 'Live',
   INACTIVE: 'Inactive',
-  DEBUG: 'Debug'
+  TEST: 'Test',
+  IN_IMPLEMENTATION: 'In Implementation'
 }

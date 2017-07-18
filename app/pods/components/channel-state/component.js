@@ -10,11 +10,11 @@ export default Ember.Component.extend({
   stateClass: Ember.computed('state', function() {
     let state = this.get('state');
 
-    if (state === CHANNEL_STATE.ACTIVE) {
+    if (state === CHANNEL_STATE.LIVE) {
       return 'badge-success';
     } else if (state === CHANNEL_STATE.INACTIVE) {
       return 'badge-default';
-    } else if (state === CHANNEL_STATE.DEBUG) {
+    } else if (state === CHANNEL_STATE.TEST || CHANNEL_STATE.IN_IMPLEMENTATION) {
       return 'badge-warning';
     }
   })
