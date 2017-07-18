@@ -8,10 +8,10 @@
         RAW Input Field
       </label>
       <div class="col-sm-8">
-        {{#x-select class="form-control custom-select" id="raw-input-field" value=fieldMapping.rawField action=(action (mut fieldMapping.rawField)) as |xs|}}
+        {{#x-select class="form-control custom-select" id="raw-input-field" value=fieldMapping.rawField.id action=(action "rawFieldSelected") as |xs|}}
           {{#xs.option value=""}}Select...{{/xs.option}}
-          {{#each rawInputFields as |rawInputField|}}
-            {{#xs.option value=rawInputField}}{{rawInputField}}{{/xs.option}}
+          {{#each sortedRawFields as |rawField|}}
+            {{#xs.option value=rawField.id}}{{rawField.name}}{{/xs.option}}
           {{/each}}
         {{/x-select}}
       </div>

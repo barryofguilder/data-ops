@@ -1,0 +1,27 @@
+{{#if rawFields}}
+  {{#data-table}}
+    <thead>
+      <tr>
+        <th>Header Name</th>
+        <th class="col-options"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each sortedRawFields as |rawField|}}
+        <tr>
+          <td>{{rawField.name}}</td>
+          <td></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  {{/data-table}}
+{{else}}
+  <div class="alert alert-warning">
+    No RAW input file headers have been uploaded.
+  </div>
+
+  <button type="button" class="btn btn-secondary">
+    {{fa-icon "upload"}}
+    Upload RAW headers
+  </button>
+{{/if}}

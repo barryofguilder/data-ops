@@ -6,7 +6,7 @@ import ConversionSummary from 'data-ops/utils/conversion-summary';
 export default DS.Model.extend({
   fieldType: DS.attr('string'),
   name: DS.attr('string'),
-  rawField: DS.attr('string'),
+  rawField: DS.belongsTo('raw-field'),
   mappingType: DS.attr('string'),
   codeset: DS.attr('string'),
   conversionFunction: DS.belongsTo('conversion-function'),

@@ -9,6 +9,9 @@ export default function(server) {
     This data will not be loaded in your tests.
   */
 
+  // Conversion Functions
+  //
+
   server.create('conversion-function', {
     name: 'date_YYYYMMDDhhmm(<input>)',
     multipleParams: false
@@ -24,16 +27,44 @@ export default function(server) {
     multipleParams: true
   });
 
+  // Channels
+  //
+
   let channels = server.createList('channel', 6);
+
+  // Field Mappings
+  //
 
   for (let i = 0; i < channels.length; i++) {
     let channel = channels[i];
+    let rawAdmitDate, rawAdmitSource, rawCity, rawDob, rawFacilityId, rawLanguage, rawSex, rawSt, rawZip;
+
+    if (i !== channels.length - 1) {
+      server.create('raw-field', { name: 'Addr1', channel });
+      server.create('raw-field', { name: 'Addr2', channel });
+      rawAdmitDate = server.create('raw-field', { name: 'AdmitDate', channel });
+      rawAdmitSource = server.create('raw-field', { name: 'AdmitSource', channel });
+      server.create('raw-field', { name: 'AdmitTime', channel });
+      rawCity = server.create('raw-field', { name: 'City', channel });
+      rawDob = server.create('raw-field', { name: 'DOB', channel });
+      server.create('raw-field', { name: 'Email', channel });
+      rawFacilityId = server.create('raw-field', { name: 'FacilityId', channel });
+      server.create('raw-field', { name: 'FirstName', channel });
+      rawLanguage = server.create('raw-field', { name: 'Language', channel });
+      server.create('raw-field', { name: 'LastName', channel });
+      server.create('raw-field', { name: 'MiddleName', channel });
+      server.create('raw-field', { name: 'MRN', channel });
+      server.create('raw-field', { name: 'PatientClass', channel });
+      rawSex = server.create('raw-field', { name: 'Sex', channel });
+      rawSt = server.create('raw-field', { name: 'ST', channel });
+      rawZip = server.create('raw-field', { name: 'Zip', channel });
+    }
 
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressCity',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
-      rawField: 'City',
+      rawField: rawCity,
       channel
     });
 
@@ -41,7 +72,7 @@ export default function(server) {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressPostalCode',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
-      rawField: 'Zip',
+      rawField: rawZip,
       channel
     });
 
@@ -49,7 +80,7 @@ export default function(server) {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'AddressState',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
-      rawField: 'ST',
+      rawField: rawSt,
       channel
     });
 
@@ -57,7 +88,7 @@ export default function(server) {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'DateOfBirth',
       mappingType: MAPPING_TYPE.FUNCTION,
-      rawField: 'DOB',
+      rawField: rawDob,
       conversionFunction: conversionFunction1,
       channel
     });
@@ -72,7 +103,7 @@ export default function(server) {
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'Gender',
-      rawField: 'Sex',
+      rawField: rawSex,
       mappingType: MAPPING_TYPE.CODESET,
       codeset: 'AdministrativeSex',
       channel
@@ -112,7 +143,7 @@ export default function(server) {
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
       name: 'PrimaryLanguage',
-      rawField: 'Language',
+      rawField: rawLanguage,
       mappingType: MAPPING_TYPE.CODESET,
       codeset: 'Language',
       channel
@@ -122,7 +153,7 @@ export default function(server) {
       fieldType: FIELD_TYPE.ENCOUNTER,
       name: 'AdmitDateTime',
       mappingType: MAPPING_TYPE.FUNCTION,
-      rawField: 'AdmitDate',
+      rawField: rawAdmitDate,
       conversionFunction: conversionFunction1,
       channel
     });
@@ -131,7 +162,7 @@ export default function(server) {
       fieldType: FIELD_TYPE.ENCOUNTER,
       name: 'AdmitSource',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
-      rawField: 'AdmitSource',
+      rawField: rawAdmitSource,
       channel
     });
 
@@ -152,7 +183,7 @@ export default function(server) {
       fieldType: FIELD_TYPE.ENCOUNTER,
       name: 'FacilityID',
       mappingType: MAPPING_TYPE.PASSTHROUGH,
-      rawField: 'FacilityId',
+      rawField: rawFacilityId,
       channel
     });
 

@@ -26,10 +26,7 @@
     Input File Headers
   {{/p.header}}
   {{#p.body}}
-    {{!--
-      Show table with "Column Number" and "Name".
-    --}}
-    Nothing to see here, move along :)
+    {{raw-field-grid channel=model}}
   {{/p.body}}
 {{/collapsible-panel}}
 
@@ -56,15 +53,6 @@
     Raw Column Mappings
   {{/p.header}}
   {{#p.body}}
-    {{!--
-      Show 'View RAW File Format' button that will show a modal with the
-      RAW colunn names and the ordianal position in the file.
-    --}}
-    {{!--
-      When starting a new channel, don't show these tables. Instead, show a button
-      that says "Upload RAW headers" that will then take the columns and then
-      show the tables.
-    --}}
     {{#mapping-section title="Patient Fields"}}
       {{#data-table}}
         <thead>
@@ -102,7 +90,7 @@
         </thead>
         <tbody>
           {{#each filteredEncounterRawFields as |field|}}
-            {{mapping-record
+            {{mapping-raw-record
               model=field
               onEdit=(action (mut rawFieldToBeEdited) field)
             }}

@@ -37,4 +37,15 @@ export default function() {
 
   this.get('/conversion-functions');
   this.get('/conversion-functions/:id');
+
+  this.get('/raw-fields', ({ rawFields }, request) => {
+    let channelId = request.queryParams.channelId;
+
+    if (channelId) {
+      return rawFields.where({ channelId });
+    }
+
+    return rawFields;
+  });
+  this.get('/raw-field/:id');
 }
