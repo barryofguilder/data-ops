@@ -1,7 +1,5 @@
 import MAPPING_TYPE from 'data-ops/utils/mapping-type-constants';
 import FIELD_TYPE from 'data-ops/utils/field-type-constants';
-import QUALISYS_MAPPING_TYPE from 'data-ops/utils/qualisys-mapping-constants';
-import BK_TYPE from 'data-ops/utils/business-key-type-constants';
 
 export default function(server) {
 
@@ -23,7 +21,7 @@ export default function(server) {
     multipleParams: false
   });
 
-  let conversionCombine = server.create('conversion-function', {
+  server.create('conversion-function', {
     name: 'Combine(<input1>, <input2>, ...)',
     multipleParams: true
   });
@@ -68,79 +66,63 @@ export default function(server) {
     // Business Keys
     //
 
-    let patientFunctionParams;
+    let patientRawFields;
 
     if (rawMrn) {
-      patientFunctionParams = [ rawMrn.attrs.name, rawDob.attrs.name ];
+      patientRawFields = [ rawMrn, rawDob ];
     }
 
     server.create('business-key', {
-      keyType: BK_TYPE.PATIENT,
       name: 'Patient',
-      mappingType: MAPPING_TYPE.FUNCTION,
-      conversionFunction: conversionCombine,
-      conversionFunctionParams: patientFunctionParams,
+      rawFields: patientRawFields,
       channel
     });
 
-    let encounterFunctionParams;
+    let encounterRawFields;
 
     if (rawVisitNumber) {
-      encounterFunctionParams = [
-        rawVisitNumber.attrs.name,
-        rawVisitDate.attrs.name,
-        rawFacilityId.attrs.name
-      ];
+      encounterRawFields = [ rawVisitNumber, rawVisitDate, rawFacilityId ];
     }
 
     server.create('business-key', {
-      keyType: BK_TYPE.ENCOUNTER,
       name: 'Encounter',
-      mappingType: MAPPING_TYPE.FUNCTION,
-      conversionFunction: conversionCombine,
-      conversionFunctionParams: encounterFunctionParams,
+      rawFields: encounterRawFields,
       channel
     });
 
-    let facilityFunctionParams;
+    let facilityRawFields;
 
     if (rawFacilityName) {
-      facilityFunctionParams = [ rawFacilityName.attrs.name, rawFacilityId.attrs.name ];
+      facilityRawFields = [ rawFacilityName, rawFacilityId ];
     }
 
     server.create('business-key', {
-      keyType: BK_TYPE.FACILITY,
       name: 'Facility',
-      mappingType: MAPPING_TYPE.FUNCTION,
-      conversionFunction: conversionCombine,
-      conversionFunctionParams: facilityFunctionParams,
+      rawFields: facilityRawFields,
       channel
     });
 
-    let locationFunctionParams;
+    let locationRawFields;
 
     if (rawFacilityName) {
-      locationFunctionParams = [
-        rawFacilityName.attrs.name,
-        rawFacilityId.attrs.name ,
-        rawVisitType.attrs.name
-      ];
+      locationRawFields = [ rawFacilityName, rawFacilityId, rawVisitType ];
     }
 
     server.create('business-key', {
-      keyType: BK_TYPE.LOCATION,
       name: 'Location',
-      mappingType: MAPPING_TYPE.FUNCTION,
-      conversionFunction: conversionCombine,
-      conversionFunctionParams: locationFunctionParams,
+      rawFields: locationRawFields,
       channel
     });
 
+    let questionRawFields;
+
+    if (rawAttendingDr) {
+      questionRawFields = [ rawAttendingDr ];
+    }
+
     server.create('business-key', {
-      keyType: BK_TYPE.QUESTION_POD,
       name: 'Question POD',
-      mappingType: MAPPING_TYPE.PASSTHROUGH,
-      rawField: rawAttendingDr,
+      rawFields: questionRawFields,
       channel
     });
 

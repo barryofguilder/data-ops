@@ -70,6 +70,13 @@
         {{/each}}
       </tbody>
     {{/data-table}}
+
+    {{#if businessKeyToBeEdited}}
+      {{mapping-bk-form
+        model=businessKeyToBeEdited
+        close=(action (mut businessKeyToBeEdited) null)
+      }}
+    {{/if}}
   {{/p.body}}
 {{/collapsible-panel}}
 
