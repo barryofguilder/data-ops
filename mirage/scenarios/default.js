@@ -273,14 +273,6 @@ export default function(server) {
       rawField: rawFacilityId,
       channel
     });
-
-    // Don't add the Qualisys mappings for the last channel
-    if (i < channels.length-1){
-      server.create('qualisys-mapping', {
-        mappingType: QUALISYS_MAPPING_TYPE.H_CAT_AGE,
-        channel
-      });
-    }
   }
 
   // Clear out mappings for the last channel

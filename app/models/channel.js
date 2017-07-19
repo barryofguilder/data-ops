@@ -8,6 +8,5 @@ export default DS.Model.extend({
   businessKeys: DS.hasMany('business-key'),
   fields: DS.hasMany('field-mapping'),
   patientFields: Ember.computed.filterBy('fields', 'fieldType', FIELD_TYPE.PATIENT),
-  encounterFields: Ember.computed.filterBy('fields', 'fieldType', FIELD_TYPE.ENCOUNTER),
-  qualisysMappings: DS.hasMany('qualisys-mapping')
+  encounterFields: Ember.computed.filterBy('fields', 'fieldType', FIELD_TYPE.ENCOUNTER)
 });

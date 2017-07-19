@@ -30,11 +30,6 @@ export default function() {
   this.get('/field-mappings');
   this.get('/field-mappings/:id');
 
-  this.get('/qualisys-mappings/:id');
-  this.post('/qualisys-mappings');
-  this.patch('/qualisys-mappings/:id');
-  this.del('/qualisys-mappings/:id');
-
   this.get('/conversion-functions');
   this.get('/conversion-functions/:id');
 
