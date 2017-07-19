@@ -27,8 +27,9 @@ export default Ember.Component.extend({
     let mappingProperties = this.get('model').getProperties('mappingType', 'rawField', 'codeset', 'conversionFunction', 'customMapping');
     this.get('fieldMapping').setProperties(mappingProperties);
 
-    let rawFields = this.get('store').peekAll('raw-field');
-    this.set('rawFields', rawFields);
+    let rawFields = this.get('store').peekAll('raw-field')
+    let channelId = this.get('model.channel.id');
+    this.set('rawFields', rawFields.filterBy('channel.id', channelId));
   },
 
   actions: {

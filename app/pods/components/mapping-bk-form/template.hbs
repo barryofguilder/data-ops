@@ -2,13 +2,13 @@
   {{#modal.header close=(action close)}}
     {{model.name}} Business Key
   {{/modal.header}}
-  {{#modal.body}}
+  {{#modal.body class=componentCssClassName}}
     <div class="form-group row">
       <label for="bk-mapping-type" class="col-sm-4 col-form-label">
         Mapping Type
       </label>
       <div class="col-sm-8">
-        {{#x-select class="form-control custom-select" id="bk-mapping-type" value=selectedMappingType action=(action (mut selectedMappingType)) as |xs|}}
+        {{#x-select class="form-control custom-select" id="bk-mapping-type" value=selectedMappingType action=(action "selectedMappingType") as |xs|}}
           {{#each mappingTypes as |mappingType|}}
             {{#xs.option value=mappingType}}{{mappingType}}{{/xs.option}}
           {{/each}}
@@ -17,17 +17,54 @@
     </div>
 
     {{#if showRawFields}}
+      {{#each model.rawFields as |inputField index|}}
+        <div class="form-group row">
+          <label class="col-12 col-sm-4 col-lg-4 col-form-label">
+            RAW Input Field {{increment-index index}}
+          </label>
+          <div class="col-10 col-sm-6 col-lg-7">
+            {{#x-select class="form-control custom-select" value=inputField.id action=(action "rawFieldSelected" inputField) as |xs|}}
+              {{#xs.option value=""}}Select...{{/xs.option}}
+              {{#each sortedRawFields as |rawField|}}
+                {{#xs.option value=rawField.id}}{{rawField.name}}{{/xs.option}}
+              {{/each}}
+            {{/x-select}}
+          </div>
+          <div class="col-2 col-sm-2 col-lg-1">
+            <button type="button" class="btn btn-danger float-right" {{action "removeInputField" inputField}}>
+              {{fa-icon "trash"}}
+            </button>
+          </div>
+        </div>
+      {{/each}}
+
+      {{#if addingInputField}}
+        <div class="form-group row">
+          <label class="col-12 col-sm-4 col-lg-4 col-form-label">
+            RAW Input Field {{new-field-number businessKey.rawFields}}
+          </label>
+          <div class="col-10 col-sm-6 col-lg-7">
+            {{#x-select class="form-control custom-select" action=(action "newInputFieldSelected") as |xs|}}
+              {{#xs.option value=""}}Select...{{/xs.option}}
+              {{#each sortedRawFields as |rawField|}}
+                {{#xs.option value=rawField.id}}{{rawField.name}}{{/xs.option}}
+              {{/each}}
+            {{/x-select}}
+          </div>
+          <div class="col-2 col-sm-2 col-lg-1">
+            <button type="button" class="btn btn-danger float-right" {{action (mut addingInputField) false}}>
+              {{fa-icon "trash"}}
+            </button>
+          </div>
+        </div>
+      {{/if}}
+
       <div class="form-group row">
-        <label for="raw-input-field" class="col-sm-4 col-form-label">
-          RAW Input Field
-        </label>
-        <div class="col-sm-8">
-          {{!-- {{#x-select class="form-control custom-select" id="raw-input-field" value=fieldMapping.rawField.id action=(action "rawFieldSelected") as |xs|}}
-            {{#xs.option value=""}}Select...{{/xs.option}}
-            {{#each sortedRawFields as |rawField|}}
-              {{#xs.option value=rawField.id}}{{rawField.name}}{{/xs.option}}
-            {{/each}}
-          {{/x-select}} --}}
+        <div class="offset-sm-4 col-sm-8">
+          <button type="button" class="btn btn-secondary btn-sm" {{action (mut addingInputField) true}}>
+            {{fa-icon "plus"}}
+            Add Input Field
+          </button>
         </div>
       </div>
     {{/if}}
