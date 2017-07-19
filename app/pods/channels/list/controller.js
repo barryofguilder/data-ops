@@ -17,8 +17,9 @@ export default Ember.Controller.extend({
 
   selectedState: null,
   channelStates: [
-    CHANNEL_STATE.ACTIVE,
-    CHANNEL_STATE.DEBUG,
-    CHANNEL_STATE.INACTIVE
+    CHANNEL_STATE.LIVE,
+    CHANNEL_STATE.INACTIVE,
+    CHANNEL_STATE.TEST,
+    CHANNEL_STATE.IN_IMPLEMENTATION
   ]
 });

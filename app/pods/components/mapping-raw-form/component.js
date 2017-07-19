@@ -34,6 +34,7 @@ export default Ember.Component.extend({
   actions: {
     save() {
       this.get('model').setProperties(this.get('fieldMapping'));
+
       this.get('close')();
     },
 

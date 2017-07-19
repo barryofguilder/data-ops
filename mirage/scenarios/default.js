@@ -1,6 +1,7 @@
 import MAPPING_TYPE from 'data-ops/utils/mapping-type-constants';
 import FIELD_TYPE from 'data-ops/utils/field-type-constants';
 import QUALISYS_MAPPING_TYPE from 'data-ops/utils/qualisys-mapping-constants';
+import BK_TYPE from 'data-ops/utils/business-key-type-constants';
 
 export default function(server) {
 
@@ -17,12 +18,12 @@ export default function(server) {
     multipleParams: false
   });
 
-  let conversionFunction1 = server.create('conversion-function', {
+  let conversionDate = server.create('conversion-function', {
     name: 'date_YYYYMMDDhhmmss(<input>)',
     multipleParams: false
   });
 
-  server.create('conversion-function', {
+  let conversionCombine = server.create('conversion-function', {
     name: 'Combine(<input1>, <input2>, ...)',
     multipleParams: true
   });
@@ -32,12 +33,11 @@ export default function(server) {
 
   let channels = server.createList('channel', 6);
 
-  // Field Mappings
-  //
-
   for (let i = 0; i < channels.length; i++) {
     let channel = channels[i];
-    let rawAdmitDate, rawAdmitSource, rawCity, rawDob, rawFacilityId, rawLanguage, rawSex, rawSt, rawZip;
+    let rawAdmitDate, rawAdmitSource, rawCity, rawDob, rawFacilityId, rawLanguage;
+    let rawSex, rawSt, rawZip, rawMrn, rawVisitDate, rawVisitNumber, rawFacilityName;
+    let rawVisitType, rawAttendingDr;
 
     if (i !== channels.length - 1) {
       server.create('raw-field', { name: 'Addr1', channel });
@@ -45,20 +45,107 @@ export default function(server) {
       rawAdmitDate = server.create('raw-field', { name: 'AdmitDate', channel });
       rawAdmitSource = server.create('raw-field', { name: 'AdmitSource', channel });
       server.create('raw-field', { name: 'AdmitTime', channel });
+      rawAttendingDr = server.create('raw-field', { name: 'AttendingDrId', channel });
       rawCity = server.create('raw-field', { name: 'City', channel });
       rawDob = server.create('raw-field', { name: 'DOB', channel });
       server.create('raw-field', { name: 'Email', channel });
       rawFacilityId = server.create('raw-field', { name: 'FacilityId', channel });
+      rawFacilityName = server.create('raw-field', { name: 'FacilityName', channel });
       server.create('raw-field', { name: 'FirstName', channel });
       rawLanguage = server.create('raw-field', { name: 'Language', channel });
       server.create('raw-field', { name: 'LastName', channel });
       server.create('raw-field', { name: 'MiddleName', channel });
-      server.create('raw-field', { name: 'MRN', channel });
+      rawMrn = server.create('raw-field', { name: 'MRN', channel });
       server.create('raw-field', { name: 'PatientClass', channel });
       rawSex = server.create('raw-field', { name: 'Sex', channel });
       rawSt = server.create('raw-field', { name: 'ST', channel });
+      rawVisitDate = server.create('raw-field', { name: 'VisitDate', channel });
+      rawVisitNumber = server.create('raw-field', { name: 'VisitNumber', channel });
+      rawVisitType = server.create('raw-field', { name: 'VisitType', channel });
       rawZip = server.create('raw-field', { name: 'Zip', channel });
     }
+
+    // Business Keys
+    //
+
+    let patientFunctionParams;
+
+    if (rawMrn) {
+      patientFunctionParams = [ rawMrn.attrs.name, rawDob.attrs.name ];
+    }
+
+    server.create('business-key', {
+      keyType: BK_TYPE.PATIENT,
+      name: 'Patient',
+      mappingType: MAPPING_TYPE.FUNCTION,
+      conversionFunction: conversionCombine,
+      conversionFunctionParams: patientFunctionParams,
+      channel
+    });
+
+    let encounterFunctionParams;
+
+    if (rawVisitNumber) {
+      encounterFunctionParams = [
+        rawVisitNumber.attrs.name,
+        rawVisitDate.attrs.name,
+        rawFacilityId.attrs.name
+      ];
+    }
+
+    server.create('business-key', {
+      keyType: BK_TYPE.ENCOUNTER,
+      name: 'Encounter',
+      mappingType: MAPPING_TYPE.FUNCTION,
+      conversionFunction: conversionCombine,
+      conversionFunctionParams: encounterFunctionParams,
+      channel
+    });
+
+    let facilityFunctionParams;
+
+    if (rawFacilityName) {
+      facilityFunctionParams = [ rawFacilityName.attrs.name, rawFacilityId.attrs.name ];
+    }
+
+    server.create('business-key', {
+      keyType: BK_TYPE.FACILITY,
+      name: 'Facility',
+      mappingType: MAPPING_TYPE.FUNCTION,
+      conversionFunction: conversionCombine,
+      conversionFunctionParams: facilityFunctionParams,
+      channel
+    });
+
+    let locationFunctionParams;
+
+    if (rawFacilityName) {
+      locationFunctionParams = [
+        rawFacilityName.attrs.name,
+        rawFacilityId.attrs.name ,
+        rawVisitType.attrs.name
+      ];
+    }
+
+    server.create('business-key', {
+      keyType: BK_TYPE.LOCATION,
+      name: 'Location',
+      mappingType: MAPPING_TYPE.FUNCTION,
+      conversionFunction: conversionCombine,
+      conversionFunctionParams: locationFunctionParams,
+      channel
+    });
+
+    server.create('business-key', {
+      keyType: BK_TYPE.QUESTION_POD,
+      name: 'Question POD',
+      mappingType: MAPPING_TYPE.PASSTHROUGH,
+      rawField: rawAttendingDr,
+      channel
+    });
+
+    // Field Mappings
+    //
 
     server.create('field-mapping', {
       fieldType: FIELD_TYPE.PATIENT,
@@ -89,7 +176,7 @@ export default function(server) {
       name: 'DateOfBirth',
       mappingType: MAPPING_TYPE.FUNCTION,
       rawField: rawDob,
-      conversionFunction: conversionFunction1,
+      conversionFunction: conversionDate,
       channel
     });
 
@@ -154,7 +241,7 @@ export default function(server) {
       name: 'AdmitDateTime',
       mappingType: MAPPING_TYPE.FUNCTION,
       rawField: rawAdmitDate,
-      conversionFunction: conversionFunction1,
+      conversionFunction: conversionDate,
       channel
     });
 

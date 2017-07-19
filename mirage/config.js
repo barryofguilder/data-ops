@@ -48,4 +48,7 @@ export default function() {
     return rawFields;
   });
   this.get('/raw-field/:id');
+
+  this.get('/business-keys');
+  this.get('/business-keys/:id');
 }

@@ -47,7 +47,29 @@
     Business Key Mappings
   {{/p.header}}
   {{#p.body}}
-    Nothing to see here, move along :)
+    {{#data-table}}
+      <thead>
+        <tr>
+          <th>Business Key</th>
+          <th>Mapping</th>
+          <th class="col-options"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each filteredBusinessKeys as |field|}}
+          {{mapping-bk-record
+            model=field
+            onEdit=(action (mut businessKeyToBeEdited) field)
+          }}
+        {{else}}
+          <tr>
+            <td colspan="3">
+              <p class="no-records">No business keys have been mapped.</p>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    {{/data-table}}
   {{/p.body}}
 {{/collapsible-panel}}
 

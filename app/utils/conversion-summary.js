@@ -9,7 +9,11 @@ export default function(conversionFunction, fieldName, fieldParams) {
     return displayForMultipleParams(conversionFunction.get('name'), fieldParams);
   }
 
-  return conversionFunction.get('name').replace('<input>', fieldName);
+  //try {
+    return conversionFunction.get('name').replace('<input>', fieldName);
+  // } catch(e) {
+  //   return '';
+  // }
 }
 
 function displayForMultipleParams(conversionFunctionName, fieldParams) {

@@ -14,6 +14,18 @@ export default Ember.Controller.extend({
     return this.get('showAllRecords') ? null : 'active';
   }),
 
+  filteredBusinessKeys: Ember.computed('showAllRecords', 'model.businessKeys', function() {
+    let businessKeys = this.get('model.businessKeys');
+
+    if (this.get('showAllRecords')) {
+      return businessKeys;
+    }
+
+    return businessKeys.filter((field) => {
+      return Ember.isPresent(field.get('mappingType'));
+    });
+  }),
+
   filteredPatientRawFields: Ember.computed('showAllRecords', 'model.patientFields', function() {
     let patientFields = this.get('model.patientFields');
 
@@ -22,7 +34,7 @@ export default Ember.Controller.extend({
     }
 
     return patientFields.filter((field) => {
-      return Ember.isPresent(field.get('rawField'));
+      return Ember.isPresent(field.get('rawField.id'));
     });
   }),
 
@@ -46,7 +58,7 @@ export default Ember.Controller.extend({
     }
 
     return encounterFields.filter((field) => {
-      return Ember.isPresent(field.get('rawField'));
+      return Ember.isPresent(field.get('rawField.id'));
     });
   }),
 
