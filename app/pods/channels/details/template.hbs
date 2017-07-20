@@ -1,6 +1,9 @@
 {{#page-title}}
   {{model.name}}
-  {{channel-state state=model.state}}
+
+  <button type="button" class="toggle-error-btn" {{action "toggleRawErrors"}}>
+    {{channel-state state=model.state}}
+  </button>
 {{/page-title}}
 
 {{#page-options as |p|}}
@@ -47,6 +50,9 @@
 {{#collapsible-panel as |p|}}
   {{#p.header}}
     Business Key Mappings
+    {{#if showErrors}}
+      {{error-icon}}
+    {{/if}}
   {{/p.header}}
   {{#p.body}}
     {{#data-table}}
@@ -85,6 +91,9 @@
 {{#collapsible-panel as |p|}}
   {{#p.header}}
     Raw Column Mappings
+    {{#if showErrors}}
+      {{error-icon}}
+    {{/if}}
   {{/p.header}}
   {{#p.body}}
     {{#mapping-section title="Patient Fields"}}

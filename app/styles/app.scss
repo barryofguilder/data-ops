@@ -18,3 +18,15 @@ body {
   // Push down the body content due to the fixed navbar
   padding-top: 4.5rem;
 }
+
+.toggle-error-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+}

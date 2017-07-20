@@ -1,0 +1,16 @@
+// Error Icon
+//
+
+& {
+  background: transparent;
+  border: none;
+  outline: none;
+  margin: 0;
+  margin-left: .25rem;
+  padding: 0;
+  color: $brand-danger;
+
+  &:focus {
+    outline: none;
+  }
+}

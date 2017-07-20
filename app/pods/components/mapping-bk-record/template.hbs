@@ -1,4 +1,9 @@
-<td>{{model.name}}</td>
+<td>
+  {{model.name}}
+  {{#if showErrors}}
+    {{error-icon message="The 'DOB' RAW field no longer exists"}}
+  {{/if}}
+</td>
 <td>
   {{model.mappingDisplay}}
 </td>

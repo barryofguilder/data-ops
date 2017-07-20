@@ -2,9 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   store: Ember.inject.service(),
+  error: Ember.inject.service(),
 
   fieldToBeEdited: null,
   showAllRecords: true,
+  showErrors: Ember.computed.alias('error.showErrors'),
 
   allRecordsButtonClass: Ember.computed('showAllRecords', function() {
     return this.get('showAllRecords') ? 'active' : null;
@@ -71,5 +73,11 @@ export default Ember.Controller.extend({
     return encounterFields.filter((field) => {
       return Ember.isPresent(field.get('mappingType'));
     });
-  })
+  }),
+
+  actions: {
+    toggleRawErrors() {
+      this.toggleProperty('error.showErrors');
+    }
+  }
 });
