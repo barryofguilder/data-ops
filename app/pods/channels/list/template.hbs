@@ -1,13 +1,15 @@
 {{page-title "Channels"}}
 
-{{#page-options}}
-  <label class="page-option-label" id="show-channel-state">Show:</label>
-  {{#x-select class="form-control custom-select page-option-dropdown" id="show-channel-state" value=selectedState action=(action (mut selectedState)) as |xs|}}
-    {{#xs.option value=""}}All{{/xs.option}}
-    {{#each channelStates as |state|}}
-      {{#xs.option value=state}}{{state}}{{/xs.option}}
-    {{/each}}
-  {{/x-select}}
+{{#page-options as |p|}}
+  {{#p.right}}
+    <label class="page-option-label" for="show-channel-state">Show:</label>
+    {{#x-select class="form-control custom-select page-option-dropdown" id="show-channel-state" value=selectedState action=(action (mut selectedState)) as |xs|}}
+      {{#xs.option value=""}}All{{/xs.option}}
+      {{#each channelStates as |state|}}
+        {{#xs.option value=state}}{{state}}{{/xs.option}}
+      {{/each}}
+    {{/x-select}}
+  {{/p.right}}
 {{/page-options}}
 
 {{#data-table}}

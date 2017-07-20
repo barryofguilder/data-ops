@@ -1,5 +1,6 @@
 import { Factory } from 'ember-cli-mirage';
 import CHANNEL_STATE from 'data-ops/utils/channel-constants';
+import DELIMETER from 'data-ops/utils/delimeter-constants';
 
 const STATES = [
   CHANNEL_STATE.LIVE,
@@ -9,6 +10,14 @@ const STATES = [
   CHANNEL_STATE.LIVE,
   CHANNEL_STATE.INACTIVE,
 ];
+const DELIMETERS = [
+  DELIMETER.PIPE,
+  DELIMETER.PIPE,
+  DELIMETER.TAB,
+  DELIMETER.PIPE,
+  DELIMETER.COMMA,
+  DELIMETER.PIPE
+];
 
 export default Factory.extend({
   name(i) {
@@ -16,5 +25,8 @@ export default Factory.extend({
   },
   state(i) {
     return STATES[i];
+  },
+  rawFileDelimeter(i) {
+    return DELIMETERS[i];
   }
 });

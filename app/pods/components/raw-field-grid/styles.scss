@@ -1,0 +1,16 @@
+// RAW Field Grid
+//
+
+.col-raw-column-number {
+  width: 170px;
+}
+
+.sortable-grid-header {
+  color: $body-color;
+
+  &:hover,
+  &:focus {
+    color: $body-color;
+    text-decoration: none;
+  }
+}

@@ -1,12 +1,28 @@
 import Ember from 'ember';
+import DELIMETER from 'data-ops/utils/delimeter-constants';
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
 
   channel: null,
   rawFields: null,
-  rawFieldSort: ['name'],
+  rawFieldSort: Ember.computed('sortColumn', 'sortDirection', function() {
+    return [`${this.get('sortColumn')}:${this.get('sortDirection')}`];
+  }),
   sortedRawFields: Ember.computed.sort('rawFields', 'rawFieldSort'),
+
+  sortColumn: 'name',
+  sortDirection: 'asc',
+
+  showNameSort: Ember.computed.equal('sortColumn', 'name'),
+  showNumberSort: Ember.computed.equal('sortColumn', 'columnNumber'),
+
+  delimeters: [
+    DELIMETER.PIPE,
+    DELIMETER.TAB,
+    DELIMETER.COMMA,
+    DELIMETER.SEMICOLON
+  ],
 
   init() {
     this._super(...arguments);
@@ -14,5 +30,23 @@ export default Ember.Component.extend({
     this.get('store').query('raw-field', { channelId: this.get('channel.id') }).then((rawFields) => {
       this.set('rawFields', rawFields);
     });
+  },
+
+  actions: {
+    sortGrid(columnName) {
+      let sortColumn = this.get('sortColumn');
+      let sortDirection = this.get('sortDirection');
+
+      if (sortColumn === columnName) {
+        if (sortDirection === 'asc') {
+          this.set('sortDirection', 'desc');
+        } else {
+          this.set('sortDirection', 'asc');
+        }
+      } else {
+        this.set('sortColumn', columnName);
+        this.set('sortDirection', 'asc');
+      }
+    }
   }
 });

@@ -1,3 +1,4 @@
-<div class="pull-right">
-  {{yield}}
-</div>
+{{yield (hash
+  left=(component "page-options-side" side="left")
+  right=(component "page-options-side" side="right")
+)}}

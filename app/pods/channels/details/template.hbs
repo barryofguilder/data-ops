@@ -3,16 +3,18 @@
   {{channel-state state=model.state}}
 {{/page-title}}
 
-{{#page-options}}
-  <label class="page-option-label">Show Mappings:</label>
-  <div class="btn-group">
-    <button type="button" class="btn btn-secondary {{allRecordsButtonClass}}" {{action (mut showAllRecords) true}}>
-      All
-    </button>
-    <button type="button" class="btn btn-secondary {{mappedRecordsButtonClass}}" {{action (mut showAllRecords) false}}>
-      Configured
-    </button>
-  </div>
+{{#page-options as |p|}}
+  {{#p.right}}
+    <label class="page-option-label">Show Mappings:</label>
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary {{allRecordsButtonClass}}" {{action (mut showAllRecords) true}}>
+        All
+      </button>
+      <button type="button" class="btn btn-secondary {{mappedRecordsButtonClass}}" {{action (mut showAllRecords) false}}>
+        Configured
+      </button>
+    </div>
+  {{/p.right}}
 {{/page-options}}
 
 {{#collapsible-panel as |p|}}
@@ -95,6 +97,7 @@
           </tr>
         </thead>
         <tbody>
+          {{!-- TODO: Make into dropdowns --}}
           {{#each filteredPatientRawFields as |field|}}
             {{mapping-raw-record
               model=field

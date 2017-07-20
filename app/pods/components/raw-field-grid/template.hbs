@@ -1,23 +1,47 @@
 {{#if rawFields}}
-  {{#page-options}}
-    <button type="button" class="btn btn-secondary">
-      {{fa-icon "upload"}}
-      Upload RAW headers
-    </button>
+  {{#page-options as |p|}}
+    {{#p.left}}
+      <label for="page-option-label">Delimeter:</label>
+      {{#x-select class="form-control custom-select page-option-dropdown" id="raw-header-delimeter" value=channel.rawFileDelimeter action=(action (mut channel.rawFileDelimeter)) as |xs|}}
+        {{#each delimeters as |delimeter|}}
+          {{#xs.option value=delimeter}}{{delimeter}}{{/xs.option}}
+        {{/each}}
+      {{/x-select}}
+    {{/p.left}}
+    {{#p.right}}
+        <button type="button" class="btn btn-secondary">
+          {{fa-icon "upload"}}
+          Upload RAW headers
+        </button>
+    {{/p.right}}
   {{/page-options}}
 
   {{#data-table}}
     <thead>
       <tr>
-        <th>Header Name</th>
-        <th class="col-options"></th>
+        <th>
+          <a href="#" class="sortable-grid-header" {{action "sortGrid" "name"}}>
+            Header Name
+            {{#if showNameSort}}
+              {{sort-direction direction=sortDirection}}
+            {{/if}}
+          </a>
+        </th>
+        <th class="col-raw-column-number">
+          <a href="#" class="sortable-grid-header" {{action "sortGrid" "columnNumber"}}>
+            Column Number
+            {{#if showNumberSort}}
+              {{sort-direction direction=sortDirection}}
+            {{/if}}
+          </a>
+        </th>
       </tr>
     </thead>
     <tbody>
       {{#each sortedRawFields as |rawField|}}
         <tr>
           <td>{{rawField.name}}</td>
-          <td></td>
+          <td>{{rawField.columnNumber}}</td>
         </tr>
       {{/each}}
     </tbody>
@@ -27,8 +51,25 @@
     No RAW input file headers have been uploaded.
   </div>
 
-  <button type="button" class="btn btn-secondary">
-    {{fa-icon "upload"}}
-    Upload RAW headers
-  </button>
+  <div class="form-group row">
+    <label for="raw-input-field" class="col-sm-4 col-form-label">
+      Delimeter
+    </label>
+    <div class="col-sm-8">
+      {{#x-select class="form-control custom-select" id="raw-header-delimeter" value=channel.rawFileDelimeter action=(action (mut channel.rawFileDelimeter)) as |xs|}}
+        {{#each delimeters as |delimeter|}}
+          {{#xs.option value=delimeter}}{{delimeter}}{{/xs.option}}
+        {{/each}}
+      {{/x-select}}
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class=" offset-sm-4 col-sm-8">
+      <button type="button" class="btn btn-secondary">
+        {{fa-icon "upload"}}
+        Upload RAW headers
+      </button>
+    </div>
+  </div>
 {{/if}}

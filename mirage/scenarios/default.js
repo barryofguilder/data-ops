@@ -38,29 +38,29 @@ export default function(server) {
     let rawVisitType, rawAttendingDr;
 
     if (i !== channels.length - 1) {
-      server.create('raw-field', { name: 'Addr1', channel });
-      server.create('raw-field', { name: 'Addr2', channel });
-      rawAdmitDate = server.create('raw-field', { name: 'AdmitDate', channel });
-      rawAdmitSource = server.create('raw-field', { name: 'AdmitSource', channel });
-      server.create('raw-field', { name: 'AdmitTime', channel });
-      rawAttendingDr = server.create('raw-field', { name: 'AttendingDrId', channel });
-      rawCity = server.create('raw-field', { name: 'City', channel });
-      rawDob = server.create('raw-field', { name: 'DOB', channel });
-      server.create('raw-field', { name: 'Email', channel });
-      rawFacilityId = server.create('raw-field', { name: 'FacilityId', channel });
-      rawFacilityName = server.create('raw-field', { name: 'FacilityName', channel });
-      server.create('raw-field', { name: 'FirstName', channel });
-      rawLanguage = server.create('raw-field', { name: 'Language', channel });
-      server.create('raw-field', { name: 'LastName', channel });
-      server.create('raw-field', { name: 'MiddleName', channel });
-      rawMrn = server.create('raw-field', { name: 'MRN', channel });
-      server.create('raw-field', { name: 'PatientClass', channel });
-      rawSex = server.create('raw-field', { name: 'Sex', channel });
-      rawSt = server.create('raw-field', { name: 'ST', channel });
-      rawVisitDate = server.create('raw-field', { name: 'VisitDate', channel });
-      rawVisitNumber = server.create('raw-field', { name: 'VisitNumber', channel });
-      rawVisitType = server.create('raw-field', { name: 'VisitType', channel });
-      rawZip = server.create('raw-field', { name: 'Zip', channel });
+      server.create('raw-field', { name: 'Addr1', columnNumber: 11, channel });
+      server.create('raw-field', { name: 'Addr2', columnNumber: 12, channel });
+      rawAdmitDate = server.create('raw-field', { name: 'AdmitDate', columnNumber: 17, channel });
+      rawAdmitSource = server.create('raw-field', { name: 'AdmitSource', columnNumber: 19, channel });
+      server.create('raw-field', { name: 'AdmitTime', columnNumber: 18, channel });
+      rawAttendingDr = server.create('raw-field', { name: 'AttendingDrId', columnNumber: 20, channel });
+      rawCity = server.create('raw-field', { name: 'City', columnNumber: 13, channel });
+      rawDob = server.create('raw-field', { name: 'DOB', columnNumber: 10, channel });
+      server.create('raw-field', { name: 'Email', columnNumber: 21, channel });
+      rawFacilityId = server.create('raw-field', { name: 'FacilityId', columnNumber: 22, channel });
+      rawFacilityName = server.create('raw-field', { name: 'FacilityName', columnNumber: 23, channel });
+      server.create('raw-field', { name: 'FirstName', columnNumber: 6, channel });
+      rawLanguage = server.create('raw-field', { name: 'Language', columnNumber: 16, channel });
+      server.create('raw-field', { name: 'LastName', columnNumber: 8, channel });
+      server.create('raw-field', { name: 'MiddleName', columnNumber: 7, channel });
+      rawMrn = server.create('raw-field', { name: 'MRN', columnNumber: 4, channel });
+      server.create('raw-field', { name: 'PatientClass', columnNumber: 5, channel });
+      rawSex = server.create('raw-field', { name: 'Sex', columnNumber: 9, channel });
+      rawSt = server.create('raw-field', { name: 'ST', columnNumber: 14, channel });
+      rawVisitDate = server.create('raw-field', { name: 'VisitDate', columnNumber: 3, channel });
+      rawVisitNumber = server.create('raw-field', { name: 'VisitNumber', columnNumber: 2, channel });
+      rawVisitType = server.create('raw-field', { name: 'VisitType', columnNumber: 1, channel });
+      rawZip = server.create('raw-field', { name: 'Zip', columnNumber: 15, channel });
     }
 
     // Business Keys
