@@ -9,5 +9,5 @@ export default DS.Model.extend({
   fields: DS.hasMany('field-mapping'),
   patientFields: Ember.computed.filterBy('fields', 'fieldType', FIELD_TYPE.PATIENT),
   encounterFields: Ember.computed.filterBy('fields', 'fieldType', FIELD_TYPE.ENCOUNTER),
-  rawFileDelimeter: DS.attr('string')
+  rawFileDelimiter: DS.attr('string')
 });

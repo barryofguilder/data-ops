@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import DELIMETER from 'data-ops/utils/delimeter-constants';
+import DELIMITER from 'data-ops/utils/delimiter-constants';
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
@@ -17,11 +17,11 @@ export default Ember.Component.extend({
   showNameSort: Ember.computed.equal('sortColumn', 'name'),
   showNumberSort: Ember.computed.equal('sortColumn', 'columnNumber'),
 
-  delimeters: [
-    DELIMETER.PIPE,
-    DELIMETER.TAB,
-    DELIMETER.COMMA,
-    DELIMETER.SEMICOLON
+  delimiters: [
+    DELIMITER.PIPE,
+    DELIMITER.TAB,
+    DELIMITER.COMMA,
+    DELIMITER.SEMICOLON
   ],
 
   init() {

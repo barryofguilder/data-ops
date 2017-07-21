@@ -12,7 +12,7 @@ export default DS.Model.extend({
     let literalValue = this.get('literalValue');
 
     if (Ember.isPresent(literalValue)) {
-      return literalValue;
+      return `Literal Value: ${literalValue})`;
     }
 
     if (this.get('rawFields.length') === 0) {
