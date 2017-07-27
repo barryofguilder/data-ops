@@ -16,6 +16,7 @@ export default Ember.Component.extend({
 
   showNameSort: Ember.computed.equal('sortColumn', 'name'),
   showNumberSort: Ember.computed.equal('sortColumn', 'columnNumber'),
+  showStatusSort: Ember.computed.equal('sortColumn', 'status'),
 
   delimiters: [
     DELIMITER.PIPE,

@@ -1,5 +1,11 @@
 <td>{{model.name}}</td>
 <td>
+  {{model.rawField.name}}
+  {{#if showErrors}}
+    {{error-icon message="The 'DOB' payload header no longer exists"}}
+  {{/if}}
+</td>
+<td>
   {{model.rawInputMapping}}
   {{#if showCodesetWarning}}
     <button type="button" class="codeset-warning" data-toggle="tooltip" data-placement="top" title="This codeset has not been configured.">
@@ -8,8 +14,13 @@
   {{/if}}
 </td>
 <td>
-  <button type="button" class="btn btn-secondary btn-sm" {{action onEdit}}>
-    {{fa-icon "pencil"}}
-    Edit
-  </button>
+  <div class="dropdown">
+    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+      {{fa-icon "cog"}}
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+      <a class="dropdown-item" href="#" {{action onRawEdit}}>Edit Payload Column Mapping</a>
+      <a class="dropdown-item" href="#" {{action onValueEdit}}>Edit Value Mapping</a>
+    </div>
+  </div>
 </td>

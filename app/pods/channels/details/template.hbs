@@ -22,7 +22,7 @@
 
 {{#collapsible-panel as |p|}}
   {{#p.header}}
-    Channel Settings
+    Channel Information
   {{/p.header}}
   {{#p.body}}
     Nothing to see here, move along :)
@@ -40,7 +40,7 @@
 
 {{#collapsible-panel as |p|}}
   {{#p.header}}
-    Input File Headers
+    Payload Column Headers
   {{/p.header}}
   {{#p.body}}
     {{raw-field-grid channel=model}}
@@ -90,7 +90,7 @@
 
 {{#collapsible-panel as |p|}}
   {{#p.header}}
-    Raw Column Mappings
+    Channel Mappings
     {{#if showErrors}}
       {{error-icon}}
     {{/if}}
@@ -101,16 +101,17 @@
         <thead>
           <tr>
             <th>Patient Field</th>
-            <th>RAW Field</th>
+            <th>Payload Header</th>
+            <th>Value Mapping</th>
             <th class="col-options"></th>
           </tr>
         </thead>
         <tbody>
-          {{!-- TODO: Make into dropdowns --}}
-          {{#each filteredPatientRawFields as |field|}}
-            {{mapping-raw-record
+          {{#each filteredPatientFields as |field|}}
+            {{mapping-record
               model=field
-              onEdit=(action (mut rawFieldToBeEdited) field)
+              onRawEdit=(action (mut rawFieldToBeEdited) field)
+              onValueEdit=(action (mut fieldToBeEdited) field)
             }}
           {{else}}
             <tr>
@@ -128,15 +129,17 @@
         <thead>
           <tr>
             <th>Encounter Field</th>
-            <th>RAW Field</th>
+            <th>Payload Header</th>
+            <th>Value Mapping</th>
             <th class="col-options"></th>
           </tr>
         </thead>
         <tbody>
-          {{#each filteredEncounterRawFields as |field|}}
-            {{mapping-raw-record
+          {{#each filteredEncounterFields as |field|}}
+            {{mapping-record
               model=field
-              onEdit=(action (mut rawFieldToBeEdited) field)
+              onRawEdit=(action (mut rawFieldToBeEdited) field)
+              onValueEdit=(action (mut fieldToBeEdited) field)
             }}
           {{else}}
             <tr>
@@ -155,65 +158,6 @@
         close=(action (mut rawFieldToBeEdited) null)
       }}
     {{/if}}
-  {{/p.body}}
-{{/collapsible-panel}}
-
-{{#collapsible-panel as |p|}}
-  {{#p.header}}
-    Value Mappings
-  {{/p.header}}
-  {{#p.body}}
-    {{#mapping-section title="ODS Patient Fields"}}
-      {{#data-table}}
-        <thead>
-          <tr>
-            <th>Patient Field</th>
-            <th>Mapping</th>
-            <th class="col-options"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each filteredPatientFields as |field|}}
-            {{mapping-record
-              model=field
-              onEdit=(action (mut fieldToBeEdited) field)
-            }}
-          {{else}}
-            <tr>
-              <td colspan="3">
-                <p class="no-records">No patient fields have been mapped.</p>
-              </td>
-            </tr>
-          {{/each}}
-        </tbody>
-      {{/data-table}}
-    {{/mapping-section}}
-
-    {{#mapping-section title="ODS Encounter Fields"}}
-      {{#data-table}}
-        <thead>
-          <tr>
-            <th>Encounter Field</th>
-            <th>Mapping</th>
-            <th class="col-options"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each filteredEncounterFields as |field|}}
-            {{mapping-record
-              model=field
-              onEdit=(action (mut fieldToBeEdited) field)
-            }}
-          {{else}}
-            <tr>
-              <td colspan="3">
-                <p class="no-records">No encounter fields have been mapped.</p>
-              </td>
-            </tr>
-          {{/each}}
-        </tbody>
-      {{/data-table}}
-    {{/mapping-section}}
 
     {{#if fieldToBeEdited}}
       {{mapping-form

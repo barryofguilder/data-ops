@@ -3,7 +3,7 @@
     {{#p.right}}
         <button type="button" class="btn btn-secondary">
           {{fa-icon "upload"}}
-          Upload RAW headers
+          Upload Payload Headers
         </button>
     {{/p.right}}
   {{/page-options}}
@@ -13,7 +13,7 @@
       <tr>
         <th>
           <a href="#" class="sortable-grid-header" {{action "sortGrid" "name"}}>
-            Header Name
+            Column Name
             {{#if showNameSort}}
               {{sort-direction direction=sortDirection}}
             {{/if}}
@@ -27,6 +27,14 @@
             {{/if}}
           </a>
         </th>
+        <th class="col-raw-status">
+          <a href="#" class="sortable-grid-header" {{action "sortGrid" "status"}}>
+            Status
+            {{#if showStatusSort}}
+              {{sort-direction direction=sortDirection}}
+            {{/if}}
+          </a>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -34,13 +42,14 @@
         <tr>
           <td>{{rawField.name}}</td>
           <td>{{rawField.columnNumber}}</td>
+          <td>{{rawField.status}}</td>
         </tr>
       {{/each}}
     </tbody>
   {{/data-table}}
 {{else}}
   <div class="alert alert-warning">
-    No RAW input file headers have been uploaded.
+    No payload headers have been uploaded.
   </div>
 
   <div class="form-group row">
@@ -57,10 +66,19 @@
   </div>
 
   <div class="form-group row">
+    <label for="payload-file" class="col-sm-4 col-form-label">
+      Payload File
+    </label>
+    <div class="col-sm-8">
+      <input type="file" name="payload-file">
+    </div>
+  </div>
+
+  <div class="form-group row">
     <div class=" offset-sm-4 col-sm-8">
       <button type="button" class="btn btn-secondary">
         {{fa-icon "upload"}}
-        Upload RAW headers
+        Upload Payload Headers
       </button>
     </div>
   </div>

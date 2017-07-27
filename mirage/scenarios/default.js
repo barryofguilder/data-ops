@@ -40,27 +40,27 @@ export default function(server) {
     if (i !== channels.length - 1) {
       server.create('raw-field', { name: 'Addr1', columnNumber: 11, channel });
       server.create('raw-field', { name: 'Addr2', columnNumber: 12, channel });
-      rawAdmitDate = server.create('raw-field', { name: 'AdmitDate', columnNumber: 17, channel });
-      rawAdmitSource = server.create('raw-field', { name: 'AdmitSource', columnNumber: 19, channel });
+      rawAdmitDate = server.create('raw-field', { name: 'AdmitDate', columnNumber: 17, isMapped: true, channel });
+      rawAdmitSource = server.create('raw-field', { name: 'AdmitSource', columnNumber: 19, isMapped: true, channel });
       server.create('raw-field', { name: 'AdmitTime', columnNumber: 18, channel });
       rawAttendingDr = server.create('raw-field', { name: 'AttendingDrId', columnNumber: 20, channel });
-      rawCity = server.create('raw-field', { name: 'City', columnNumber: 13, channel });
-      rawDob = server.create('raw-field', { name: 'DOB', columnNumber: 10, channel });
+      rawCity = server.create('raw-field', { name: 'City', columnNumber: 13, isMapped: true, channel });
+      rawDob = server.create('raw-field', { name: 'DOB', columnNumber: 10, isMapped: true, channel });
       server.create('raw-field', { name: 'Email', columnNumber: 21, channel });
-      rawFacilityId = server.create('raw-field', { name: 'FacilityId', columnNumber: 22, channel });
+      rawFacilityId = server.create('raw-field', { name: 'FacilityId', columnNumber: 22, isMapped: true, channel });
       rawFacilityName = server.create('raw-field', { name: 'FacilityName', columnNumber: 23, channel });
       server.create('raw-field', { name: 'FirstName', columnNumber: 6, channel });
-      rawLanguage = server.create('raw-field', { name: 'Language', columnNumber: 16, channel });
+      rawLanguage = server.create('raw-field', { name: 'Language', columnNumber: 16, isMapped: true, channel });
       server.create('raw-field', { name: 'LastName', columnNumber: 8, channel });
       server.create('raw-field', { name: 'MiddleName', columnNumber: 7, channel });
       rawMrn = server.create('raw-field', { name: 'MRN', columnNumber: 4, channel });
       server.create('raw-field', { name: 'PatientClass', columnNumber: 5, channel });
-      rawSex = server.create('raw-field', { name: 'Sex', columnNumber: 9, channel });
-      rawSt = server.create('raw-field', { name: 'ST', columnNumber: 14, channel });
+      rawSex = server.create('raw-field', { name: 'Sex', columnNumber: 9, isMapped: true, channel });
+      rawSt = server.create('raw-field', { name: 'ST', columnNumber: 14, isMapped: true, channel });
       rawVisitDate = server.create('raw-field', { name: 'VisitDate', columnNumber: 3, channel });
       rawVisitNumber = server.create('raw-field', { name: 'VisitNumber', columnNumber: 2, channel });
       rawVisitType = server.create('raw-field', { name: 'VisitType', columnNumber: 1, channel });
-      rawZip = server.create('raw-field', { name: 'Zip', columnNumber: 15, channel });
+      rawZip = server.create('raw-field', { name: 'Zip', columnNumber: 15, isMapped: true, channel });
     }
 
     // Business Keys

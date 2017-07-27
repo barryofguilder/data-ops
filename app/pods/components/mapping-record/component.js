@@ -11,6 +11,8 @@ const CONFIGURED_CODESETS = [
 export default Ember.Component.extend({
   tagName: 'tr',
 
+  error: Ember.inject.service(),
+
   model: null,
   onEdit: null,
 
@@ -18,6 +20,10 @@ export default Ember.Component.extend({
     if (this.get('model.mappingType') === MAPPING_TYPE.CODESET) {
       return !CONFIGURED_CODESETS.includes(this.get('model.codeset'));
     }
+  }),
+
+  showErrors: Ember.computed('error.showErrors', 'model.name', function() {
+    return this.get('error.showErrors') && this.get('model.name') === 'DateOfBirth';
   }),
 
   modelChanged: Ember.observer('model.mappingType', 'model.codeset', function() {

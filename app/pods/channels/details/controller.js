@@ -27,7 +27,10 @@ export default Ember.Controller.extend({
     });
   }),
 
-  filteredPatientRawFields: Ember.computed('showAllRecords', 'model.patientFields', function() {
+  filteredPatientFields: Ember.computed(
+    'showAllRecords',
+    'model.patientFields.@each.rawField',
+    'model.patientFields.@each.mappingType', function() {
     let patientFields = this.get('model.patientFields');
 
     if (this.get('showAllRecords')) {
@@ -35,23 +38,15 @@ export default Ember.Controller.extend({
     }
 
     return patientFields.filter((field) => {
-      return Ember.isPresent(field.get('rawField.id'));
+      return Ember.isPresent(field.get('rawField.id')) ||
+             Ember.isPresent(field.get('mappingType'));
     });
   }),
 
-  filteredPatientFields: Ember.computed('showAllRecords', 'model.patientFields', function() {
-    let patientFields = this.get('model.patientFields');
-
-    if (this.get('showAllRecords')) {
-      return patientFields;
-    }
-
-    return patientFields.filter((field) => {
-      return Ember.isPresent(field.get('mappingType'));
-    });
-  }),
-
-  filteredEncounterRawFields: Ember.computed('showAllRecords', 'model.encounterFields', function() {
+  filteredEncounterFields: Ember.computed(
+    'showAllRecords',
+    'model.encounterFields.@each.rawField',
+    'model.encounterFields.@each.mappingType', function() {
     let encounterFields = this.get('model.encounterFields');
 
     if (this.get('showAllRecords')) {
@@ -59,19 +54,8 @@ export default Ember.Controller.extend({
     }
 
     return encounterFields.filter((field) => {
-      return Ember.isPresent(field.get('rawField.id'));
-    });
-  }),
-
-  filteredEncounterFields: Ember.computed('showAllRecords', 'model.encounterFields', function() {
-    let encounterFields = this.get('model.encounterFields');
-
-    if (this.get('showAllRecords')) {
-      return encounterFields;
-    }
-
-    return encounterFields.filter((field) => {
-      return Ember.isPresent(field.get('mappingType'));
+      return Ember.isPresent(field.get('rawField.id')) ||
+             Ember.isPresent(field.get('mappingType'));
     });
   }),
 
