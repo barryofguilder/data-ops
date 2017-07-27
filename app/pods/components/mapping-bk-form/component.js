@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import stateFor from 'ember-state-services/state-for';
 
-const MAPPING_COMBINE = 'Combine RAW fields';
+const MAPPING_COMBINE = 'Combine Payload Headers';
 const MAPPING_LITERAL = 'Literal Value';
 
 export default Ember.Component.extend({

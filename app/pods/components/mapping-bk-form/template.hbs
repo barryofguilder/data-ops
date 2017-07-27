@@ -20,7 +20,7 @@
       {{#each model.rawFields as |inputField index|}}
         <div class="form-group row">
           <label class="col-12 col-sm-4 col-lg-4 col-form-label">
-            RAW Input Field {{increment-index index}}
+            Payload Header {{increment-index index}}
           </label>
           <div class="col-10 col-sm-6 col-lg-7">
             {{#x-select class="form-control custom-select" value=inputField.id action=(action "rawFieldSelected" inputField) as |xs|}}
@@ -41,7 +41,7 @@
       {{#if addingInputField}}
         <div class="form-group row">
           <label class="col-12 col-sm-4 col-lg-4 col-form-label">
-            RAW Input Field {{new-field-number businessKey.rawFields}}
+            Payload Header {{new-field-number businessKey.rawFields}}
           </label>
           <div class="col-10 col-sm-6 col-lg-7">
             {{#x-select class="form-control custom-select" action=(action "newInputFieldSelected") as |xs|}}
@@ -63,7 +63,7 @@
         <div class="offset-sm-4 col-sm-8">
           <button type="button" class="btn btn-secondary btn-sm" {{action (mut addingInputField) true}}>
             {{fa-icon "plus"}}
-            Add Input Field
+            Add Payload Header
           </button>
         </div>
       </div>
