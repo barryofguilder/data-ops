@@ -1,11 +1,11 @@
 {{#nrc-modal as |modal|}}
   {{#modal.header close=(action close)}}
-    Raw Mapping - {{fieldType}}.{{model.name}}
+    Payload Column Mapping - {{fieldType}}.{{model.name}}
   {{/modal.header}}
   {{#modal.body class=componentCssClassName}}
     <div class="form-group row">
       <label for="raw-input-field" class="col-sm-4 col-form-label">
-        RAW Input Field
+        Payload Column
       </label>
       <div class="col-sm-8">
         {{#x-select class="form-control custom-select" id="raw-input-field" value=fieldMapping.rawField.id action=(action "rawFieldSelected") as |xs|}}

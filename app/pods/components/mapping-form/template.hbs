@@ -1,6 +1,6 @@
 {{#nrc-modal as |modal|}}
   {{#modal.header close=(action close)}}
-    Channel Mapping - {{fieldType}}.{{model.name}}
+    Value Mapping - {{fieldType}}.{{model.name}}
   {{/modal.header}}
   {{#modal.body class=componentCssClassName}}
     <div class="form-group row">
@@ -45,7 +45,7 @@
     {{#if showConversionFunction}}
       <div class="form-group row">
         <label for="conversion-function" class="col-sm-4 col-form-label">
-          Conversion Function
+          Function
         </label>
         <div class="col-sm-8">
           {{#x-select class="form-control custom-select" id="conversion-function" value=fieldMapping.conversionFunction.id action=(action "conversionFunctionSelected") as |xs|}}

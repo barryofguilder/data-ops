@@ -50,7 +50,7 @@ export default Ember.Component.extend({
     name: 'Codeset'
   }, {
     id: MAPPING_TYPE.FUNCTION,
-    name: 'Canned Function'
+    name: 'Function'
   }, {
     id: MAPPING_TYPE.CUSTOM,
     name: 'Custom'
